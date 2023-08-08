@@ -63,7 +63,7 @@ public class gameManager : MonoBehaviour
             matching += 1;
             matchingTxt.text = "성공 횟수 : " + matching.ToString();
 
-            MakeMatchText("세글자");
+            MakeMatchText("이름");
 
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
@@ -141,6 +141,9 @@ public class gameManager : MonoBehaviour
                 break;
             case "3":
                 name = "노재우";
+                break;
+            case "실패" :
+                name = "실패";
                 break;
             default:
                 name = "로그봐";
