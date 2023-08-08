@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.UIElements;
 
 
 public class gameManager : MonoBehaviour
@@ -18,7 +19,8 @@ public class gameManager : MonoBehaviour
     [SerializeField]
     GameObject MatchText;
 
-    public GameObject endTxt;
+    public GameObject endPanel;
+    public Text maxScoreTxt;
     public Text timeTxt;
     public Text matchingTxt;
     public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
@@ -28,7 +30,6 @@ public class gameManager : MonoBehaviour
     public AudioSource audioSource; // GM오디오소스
     public AudioClip matchedSound; // 카드 두개가 일치할 때 소리
     public AudioClip unmatchedSound; // 카드 두개가 다를 때 소리
-
 
     bool ShowHint = false;
 
@@ -47,6 +48,8 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // time 이 게임 시작시 초기화될 수 있게 start로 옮김
+        time = 30f;
         Time.timeScale = 1.0f;
         ShowHint = false;
 
@@ -94,6 +97,11 @@ public class gameManager : MonoBehaviour
             if (leftCards == 2)
             {
                 Invoke("GameEnd", 0.5f);
+
+                if (PlayerPrefs.GetInt("stage") > PlayerPrefs.GetInt("level"))
+                {
+                    PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("stage"));
+                }
             }
         }
         else
@@ -139,14 +147,24 @@ public class gameManager : MonoBehaviour
         StopCountDown();
         anim.SetBool("under10seconds", false);
 
-<<<<<<< Updated upstream
-        endText.text = "끝!\n" + "시도 횟수 : " + numOfMatcing;
+        if (PlayerPrefs.HasKey("bestScore") == false)
+        {
+            PlayerPrefs.SetFloat("bestScore", time);
+        }
+        else
+        {
+            if (time > PlayerPrefs.GetFloat("bestScore"))
+            {
+                PlayerPrefs.SetFloat("bestScore", time);
+            }
+        }
+
 
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
         time = 0f;
 
-=======
+
         if (PlayerPrefs.HasKey("bestScore") == false)
         {
             PlayerPrefs.SetFloat("bestScore", time);
@@ -162,12 +180,14 @@ public class gameManager : MonoBehaviour
         float maxScore = PlayerPrefs.GetFloat("bestScore");
         maxScoreTxt.text = "최고기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
 
+
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
+
         time = 0f;
->>>>>>> Stashed changes
+
     }
 
 
@@ -175,7 +195,7 @@ public class gameManager : MonoBehaviour
     //카운트 다운
 
     public Text countDownTxt;
-    
+
     bool isCountingDown = false; // 카운트다운 중인지 여부를 나타내는 변수
 
     public void StopCountDown()
@@ -208,7 +228,7 @@ public class gameManager : MonoBehaviour
         // 카운트가 0이 되면 카드 다시 뒤집기
         if (count <= 0 && firstCard != null)
         {
-            
+
 
             if (firstCard != null && secondCard == null)
             {
@@ -216,7 +236,7 @@ public class gameManager : MonoBehaviour
                 firstCard = null;
                 secondCard = null;
             }
-            
+
         }
 
         // 카운트 완료 후 초기화
@@ -275,18 +295,20 @@ public class gameManager : MonoBehaviour
     {
         if (ShowHint == false)
         {
-            ShowHint = true;
-            GameObject cards = GameObject.Find("cards");
-            int SelectCard = Random.Range(0, cards.transform.childCount);
+            ShowHint = true; // 업데이트에서 실행돼서 스위치 달아줌
+            GameObject cards = GameObject.Find("cards"); // cards는 card의 부모이기때문에 불러옴
+            int RandomCard = Random.Range(0, cards.transform.childCount); // cards.transform.childCount -> cards의 자식 갯수(남은 카드 갯수)
+                                                                          // 남은 카드 중에서 힌트를 줄 카드 랜덤 선택
 
-            for (int num = 0; num < cards.transform.childCount; num++)
+            for (int num = 0; num < cards.transform.childCount; num++) // 카드들을 비교하기위해 사용
             {
-                if (cards.transform.GetChild(SelectCard).Find("front").GetComponent<SpriteRenderer>().sprite.name
-                    == cards.transform.GetChild(num).Find("front").GetComponent<SpriteRenderer>().sprite.name
-                    && SelectCard !=num)
+                if (cards.transform.GetChild(RandomCard).Find("front").GetComponent<SpriteRenderer>().sprite.name // RandomCard의 스프라이트 이름과
+                    == cards.transform.GetChild(num).Find("front").GetComponent<SpriteRenderer>().sprite.name // for문으로 차례대로 카드 스프라이트 이름을 비교
+                    && RandomCard != num) // RandomCard와 for문의 카드 번호가 같으면 안됨
                 {
-                    cards.transform.GetChild(SelectCard).GetComponent<Animator>().SetTrigger("IsHint");
-                    cards.transform.GetChild(num).GetComponent<Animator>().SetTrigger("IsHint");
+                    cards.transform.GetChild(RandomCard).GetComponent<Animator>().SetTrigger("IsHint"); //애니메이션 트리거 작동
+                    cards.transform.GetChild(num).GetComponent<Animator>().SetTrigger("IsHint"); // 트리거 = 1회 작동
+                    break; // 짝을 찾으면 바로 중단해서 퍼포먼스 상향
                 }
             }
         }
