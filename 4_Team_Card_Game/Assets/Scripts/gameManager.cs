@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
 
     public Animator anim;
 
+    bool ShowHint = false;
 
     public int matching = 0; // mathing number
     float time = 30.0f;
@@ -38,6 +39,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+        ShowHint = false;
 
         int[] rtans = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
@@ -104,6 +106,7 @@ public class gameManager : MonoBehaviour
         if (time <= 10.0f)
         {
             anim.SetBool("under10seconds", true);
+            ShowMeTheHint();
         }
         if (time <= 0.0f)
         {
@@ -149,7 +152,7 @@ public class gameManager : MonoBehaviour
         }
 
         // 카운트가 0이 되면 카드 다시 뒤집기
-        if (count <= 0)
+        if (count <= 0 && firstCard != null)
         {
             firstCard.GetComponent<card>().CloseCard();
             firstCard = null;
@@ -208,5 +211,29 @@ public class gameManager : MonoBehaviour
                 break;
         }
         return name;
+    }
+
+
+    // 함수가 실핼될 때 힌트를 보여줌 (시간 애니메이션쪽 조건문에서 사용하면 굿)
+    void ShowMeTheHint()
+    {
+        if (ShowHint == false)
+        {
+            ShowHint = true;
+            GameObject cards = GameObject.Find("cards");
+
+            int SelectCard = Random.Range(0, cards.transform.childCount);
+
+            for (int num = 0; num < cards.transform.childCount; num++)
+            {
+                if (cards.transform.GetChild(SelectCard).Find("front").GetComponent<SpriteRenderer>().sprite.name
+                    == cards.transform.GetChild(num).Find("front").GetComponent<SpriteRenderer>().sprite.name
+                    && SelectCard !=num)
+                {
+                    cards.transform.GetChild(SelectCard).GetComponent<Animator>().SetTrigger("IsHint");
+                    cards.transform.GetChild(num).GetComponent<Animator>().SetTrigger("IsHint");
+                }
+            }
+        }
     }
 }
