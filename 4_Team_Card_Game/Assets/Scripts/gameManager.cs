@@ -123,7 +123,6 @@ public class gameManager : MonoBehaviour
     void GameEnd()
     {
         anim.SetBool("under10seconds", false);
-        timeTxt.gameObject.GetComponent<Text>().color = Color.red; // 종료 타이밍에 timeTxt빨간색 하고 싶은데 어떻게 합니까?
 
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
