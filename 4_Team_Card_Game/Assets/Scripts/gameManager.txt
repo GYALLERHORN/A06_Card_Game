@@ -112,6 +112,7 @@ public class gameManager : MonoBehaviour
 
     // 카드 매치 시도시 텍스트 출력
     // target = 텍스트 나올 오브젝트, text = 나올 글자
+    // 이미지 넣은 뒤 텍스트 설정해줘야 함
     void MakeMatchText(string text)
     {
         GameObject firstCardText = Instantiate(MatchText, firstCard.transform.position, Quaternion.identity);
