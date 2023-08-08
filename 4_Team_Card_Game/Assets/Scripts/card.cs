@@ -22,10 +22,13 @@ public class card : MonoBehaviour
 
     public void OpenCard()
     {
+
         audioSource.PlayOneShot(draw);
 
         audioSource.
-        GetComponent<Animator>().SetTrigger("IsSelect"); // ?�니메이???�생
+        
+        GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 생성
+
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
 
@@ -52,9 +55,11 @@ public class card : MonoBehaviour
     public void CloseCard()
     {
         Invoke("CloseCardInvoke",0.5f);
+        
     }
     public void CloseCardInvoke()
     {
+        gameManager.I.countDownGO.SetActive(false);
         transform.Find("front").gameObject.SetActive(false);
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("back").gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
