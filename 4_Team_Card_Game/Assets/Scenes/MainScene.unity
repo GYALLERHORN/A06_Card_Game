@@ -412,6 +412,7 @@ MonoBehaviour:
   timePenalty: {fileID: 3743978411248408890, guid: a598361e59cf1d249a91d25ff2be1a8b, type: 3}
   matching: 0
   countDownTxt: {fileID: 1619475342}
+  countDownGO: {fileID: 1619475340}
 --- !u!4 &757904570
 Transform:
   m_ObjectHideFlags: 0
@@ -571,7 +572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619475342
@@ -587,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0025007725, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9433962, g: 0.18244925, b: 0.18244925, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
