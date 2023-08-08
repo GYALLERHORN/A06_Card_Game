@@ -172,7 +172,7 @@ public class gameManager : MonoBehaviour
         }
 
         float maxScore = PlayerPrefs.GetFloat("bestScore");
-        maxScoreTxt.text = "최고기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
+        maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
 
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경

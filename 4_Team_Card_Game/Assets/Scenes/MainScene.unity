@@ -554,7 +554,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-
 --- !u!1 &862296165
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,11 +662,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alert: {fileID: 0}
-
-  stage1: {fileID: 0}
-  stage2: {fileID: 0}
-  stage3: {fileID: 0}
-
 --- !u!114 &862296169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,7 +853,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050470252}
   m_CullTransparentMesh: 1
-
 --- !u!1 &1111326623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1042,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619475340}
   m_CullTransparentMesh: 1
-
 --- !u!1 &1793976602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,9 +1077,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 200}
-
-  m_SizeDelta: {x: 500, y: 500}
-
+  m_SizeDelta: {x: 550, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1793976604
 MonoBehaviour:
@@ -1102,9 +1092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-
-  m_Color: {r: 0.27450982, g: 1, b: 0.39215687, a: 1}
-
+  m_Color: {r: 0.19607843, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1114,17 +1102,17 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5f048f80e5ad2d340b2b1ca1468508fe, type: 3}
     m_FontSize: 70
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 7
-    m_MaxSize: 70
+    m_MinSize: 0
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: "\uCD5C\uACE0 \uAE30\uB85D : 00.00\n\uC2DC\uB3C4 \uD69F\uC218 : 00"
 --- !u!222 &1793976605
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1133,7 +1121,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793976602}
   m_CullTransparentMesh: 1
-
 --- !u!1 &1812113715
 GameObject:
   m_ObjectHideFlags: 0
