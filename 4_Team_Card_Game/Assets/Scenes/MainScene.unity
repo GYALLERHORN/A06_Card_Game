@@ -405,6 +405,7 @@ MonoBehaviour:
   card: {fileID: 7979832033520400018, guid: d5adb6bdb258f4341bf228231067a6aa, type: 3}
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
+  MatchText: {fileID: 4057898671457026899, guid: ae644d691bf8e0d4e86e13035ed75714, type: 3}
   endTxt: {fileID: 223840104}
   timeTxt: {fileID: 276723282}
   matchingTxt: {fileID: 1482615867}
