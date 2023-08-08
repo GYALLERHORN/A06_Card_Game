@@ -11,7 +11,7 @@ public class gameManager : MonoBehaviour
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
-    float time = 30.0f;
+    float time = 10.0f;
     public Text timeText;
 
     void Awake()
@@ -51,7 +51,7 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
 
-            int leftCards = gameObject.transform.Find("cards").childCount;
+            int leftCards = GameObject.Find("cards").transform.childCount;
             if (leftCards == 2)
             {
                 Invoke("gameEnd", 0.5f);
@@ -71,6 +71,11 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeText.text = time.ToString("N2");
+
+        if (time <= 0.0f)
+        {
+            gameEnd();
+        }
     }
 
     void gameEnd()
