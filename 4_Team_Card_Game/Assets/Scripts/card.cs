@@ -16,7 +16,7 @@ public class card : MonoBehaviour
         
     }
 
-    public void openCard()
+    public void OpenCard()
     {
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
@@ -28,23 +28,23 @@ public class card : MonoBehaviour
         else
         {
             gameManager.I.secondCard = gameObject;
-            gameManager.I.isMatched();
+            gameManager.I.IsMatched();
         }
     }
 
-    public void destroyCard()
+    public void DestroyCard()
     {
-        Invoke("destroyCardInvoke",0.5f);
+        Invoke("DestroyCardInvoke",0.5f);
     }
-    public void destroyCardInvoke()
+    public void DestroyCardInvoke()
     {
         Destroy(gameObject);
     }
-    public void closeCard()
+    public void CloseCard()
     {
-        Invoke("closeCardInvoke",0.5f);
+        Invoke("CloseCardInvoke",0.5f);
     }
-    public void closeCardInvoke()
+    public void CloseCardInvoke()
     {
         transform.Find("front").gameObject.SetActive(false);
         transform.Find("back").gameObject.SetActive(true);

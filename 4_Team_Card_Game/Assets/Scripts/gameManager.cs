@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System.IO;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,8 +12,12 @@ public class gameManager : MonoBehaviour
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
+    public GameObject endTxt;
+    public Text timeTxt;
+    public Text matchingTxt;
+
+    public int matching = 0; // 성공 횟수
     float time = 30.0f;
-    public Text timeText;
 
     void Awake()
     {
@@ -42,25 +47,29 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void isMatched()
+    public void IsMatched()
     {
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         if (firstCardImage == secondCardImage)
         {
-            firstCard.GetComponent<card>().destroyCard();
-            secondCard.GetComponent<card>().destroyCard();
+            //카드 매칭 성공 횟수 부분
+            matching += 1;
+            matchingTxt.text = "성공 횟수 : " + matching.ToString();
 
-            int leftCards = gameObject.transform.Find("cards").childCount;
+            firstCard.GetComponent<card>().DestroyCard();
+            secondCard.GetComponent<card>().DestroyCard();
+
+            int leftCards = GameObject.Find("cards").transform.childCount;
             if (leftCards == 2)
             {
-                Invoke("gameEnd", 0.5f);
+                Invoke("GameEnd", 0.5f);
             }
         }
         else
         {
-            firstCard.GetComponent<card>().closeCard();
-            secondCard.GetComponent<card>().closeCard();
+            firstCard.GetComponent<card>().CloseCard();
+            secondCard.GetComponent<card>().CloseCard();
         }
 
         firstCard = null;
@@ -70,11 +79,18 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         time -= Time.deltaTime;
-        timeText.text = time.ToString("N2");
+        timeTxt.text = time.ToString("N2");
+        if(timeTxt.text == "0.00")
+        {
+            GameEnd();
+        }
     }
 
-    void gameEnd()
+    void GameEnd()
     {
         Time.timeScale = 0.0f;
+        endTxt.SetActive(true); // 엔드 텍스트
+        time = 0f;
+        
     }
 }

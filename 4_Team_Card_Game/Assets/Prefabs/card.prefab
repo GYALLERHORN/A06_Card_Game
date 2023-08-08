@@ -431,7 +431,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2124765487199583123}
         m_TargetAssemblyTypeName: card, Assembly-CSharp
-        m_MethodName: openCard
+        m_MethodName: OpenCard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
