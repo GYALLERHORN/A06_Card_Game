@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class card : MonoBehaviour
 {
+  
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class card : MonoBehaviour
         if (gameManager.I.firstCard == null)
         {
             gameManager.I.firstCard = gameObject;
+            gameManager.I.StartCountDown();
         }
         else
         {
@@ -51,4 +55,8 @@ public class card : MonoBehaviour
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("back").gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
+
+    //카운트다운
+
+    
 }
