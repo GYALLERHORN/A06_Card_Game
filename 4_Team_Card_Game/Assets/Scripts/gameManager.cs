@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using System.IO;
 
+
 public class gameManager : MonoBehaviour
 {
     public static gameManager I;
@@ -13,9 +14,14 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
 
+    [SerializeField]
+    GameObject MatchText;
+
     public GameObject endTxt;
     public Text timeTxt;
     public Text matchingTxt;
+    public GameObject timePenalty;
+
 
     public int matching = 0; // mathing number
     float time = 30.0f;
@@ -31,7 +37,7 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        int[] rtans = new int[] { 0, 0, 1, 1, 2, 2, 3, 3};
+        int[] rtans = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
         for (int i = 0; i < 8; i++)
@@ -43,6 +49,7 @@ public class gameManager : MonoBehaviour
             float y = i / 4 * 1.4f - 3.0f;
 
             newCard.transform.position = new Vector3(x, y, 0);
+
 
             string rtanName = "rtan" + rtans[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(rtanName);
@@ -59,6 +66,8 @@ public class gameManager : MonoBehaviour
             matching += 1;
             matchingTxt.text = "성공 횟수 : " + matching.ToString();
 
+            MakeMatchText("이름");
+
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
 
@@ -70,8 +79,15 @@ public class gameManager : MonoBehaviour
         }
         else
         {
+
+            MakeMatchText("실패");
+
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
+
+            time -= 3.0f;
+            GameObject penalty = Instantiate(timePenalty);
+            Destroy(penalty, 0.5f);
         }
 
         firstCard = null;
@@ -83,7 +99,7 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
 
         timeTxt.text = time.ToString("N2");
-        if(timeTxt.text == "0.00")
+        if (time <= 0.0f)
         {
             GameEnd();
 
@@ -134,5 +150,48 @@ public class gameManager : MonoBehaviour
         // 카운트 완료 후 초기화
         count = initialCount;
         isCountingDown = false;
+
+
+    // 카드 매치 시도시 텍스트 출력
+    // target = 텍스트 나올 오브젝트, text = 나올 글자
+    // 이미지 변경후 이름 나오게 수정
+    void MakeMatchText(string text)
+    {
+        string name = SelectName(text);
+
+        GameObject firstCardText = Instantiate(MatchText, firstCard.transform.position, Quaternion.identity);
+        GameObject secondCardText = Instantiate(MatchText, secondCard.transform.position, Quaternion.identity);
+        firstCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
+        secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
+    }
+
+    // 이름 구별 함수 (아직 미완성)
+    string SelectName(string text)
+    {
+        string name;
+
+        switch (text)
+        {
+            case "0":
+                name = "김호연";
+                break;
+            case "1":
+                name = "김진성";
+                break;
+            case "2":
+                name = "곽민규";
+                break;
+            case "3":
+                name = "노재우";
+                break;
+            case "실패" :
+                name = "실패";
+                break;
+            default:
+                name = "로그봐";
+                //Debug.Log("이름 입력 실패");
+                break;
+        }
+        return name;
     }
 }
