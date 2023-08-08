@@ -63,7 +63,7 @@ public class gameManager : MonoBehaviour
             matching += 1;
             matchingTxt.text = "성공 횟수 : " + matching.ToString();
 
-            MakeMatchText("세글자");
+            MakeMatchText("이름");
 
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
@@ -115,9 +115,42 @@ public class gameManager : MonoBehaviour
     // 이미지 변경후 이름 나오게 수정
     void MakeMatchText(string text)
     {
+        string name = SelectName(text);
+
         GameObject firstCardText = Instantiate(MatchText, firstCard.transform.position, Quaternion.identity);
         GameObject secondCardText = Instantiate(MatchText, secondCard.transform.position, Quaternion.identity);
-        firstCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = text;
-        secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = text;
+       
+        firstCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
+        secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
+    }
+
+    // 이름 구별 함수 (아직 미완성)
+    string SelectName(string text)
+    {
+        string name;
+
+        switch (text)
+        {
+            case "0":
+                name = "김호연";
+                break;
+            case "1":
+                name = "김진성";
+                break;
+            case "2":
+                name = "곽민규";
+                break;
+            case "3":
+                name = "노재우";
+                break;
+            case "실패" :
+                name = "실패";
+                break;
+            default:
+                name = "로그봐";
+                //Debug.Log("이름 입력 실패");
+                break;
+        }
+        return name;
     }
 }
