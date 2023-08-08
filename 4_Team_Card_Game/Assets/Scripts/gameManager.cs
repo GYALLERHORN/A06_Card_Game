@@ -23,6 +23,10 @@ public class gameManager : MonoBehaviour
     public GameObject timePenalty;
 
     public Animator anim;
+    public AudioSource audioSource;
+    public AudioClip matchedSound;
+    public AudioClip unmatchedSound;
+
 
 
     public int matching = 0; // mathing number
@@ -60,10 +64,13 @@ public class gameManager : MonoBehaviour
 
     public void IsMatched()
     {
+
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         if (firstCardImage == secondCardImage)
         {
+            audioSource.PlayOneShot(matchedSound);
+
             //card matching system
             matching += 1;
             matchingTxt.text = "성공 횟수 : " + matching.ToString();
@@ -81,6 +88,7 @@ public class gameManager : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(unmatchedSound);
 
             MakeMatchText("실패");
 
@@ -114,9 +122,13 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        anim.SetBool("under10seconds", false);
+        timeTxt.gameObject.GetComponent<Text>().color = Color.red; // 종료 타이밍에 timeTxt빨간색 하고 싶은데 어떻게 합니까?
+
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
         time = 0f;
+
     }
 
 
@@ -156,11 +168,6 @@ public class gameManager : MonoBehaviour
         // 카운트 완료 후 초기화
         count = initialCount;
         isCountingDown = false;
-
-
-        
-        anim.SetBool("under10seconds", false);
-        // timeTxt.gameObject.GetComponent<Text>().color = Color.red; 종료 타이밍에 timeTxt빨간색 하고 싶은데 어떻게 합니까?
     }
 
     // 카드 매치 시도시 텍스트 출력
