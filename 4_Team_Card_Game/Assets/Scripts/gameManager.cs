@@ -143,8 +143,8 @@ public class gameManager : MonoBehaviour
                 name = "노재우";
                 break;
             default:
-                name = "로그";
-                Debug.Log("이름 입력 실패");
+                name = "로그봐";
+                //Debug.Log("이름 입력 실패");
                 break;
         }
         return name;
