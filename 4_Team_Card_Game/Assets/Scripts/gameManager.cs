@@ -220,14 +220,13 @@ public class gameManager : MonoBehaviour
     }
 
 
-    // 함수가 실핼될 때 힌트를 보여줌 (시간 애니메이션쪽 조건문에서 사용하면 굿)
+    // 함수가 실핼될 때 힌트를 보여줌
     void ShowMeTheHint()
     {
         if (ShowHint == false)
         {
             ShowHint = true;
             GameObject cards = GameObject.Find("cards");
-
             int SelectCard = Random.Range(0, cards.transform.childCount);
 
             for (int num = 0; num < cards.transform.childCount; num++)

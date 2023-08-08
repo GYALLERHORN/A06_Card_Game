@@ -60,7 +60,4 @@ public class card : MonoBehaviour
         transform.Find("back").gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
-    //카운트다운
-
-    
 }
