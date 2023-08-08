@@ -409,6 +409,7 @@ MonoBehaviour:
   endTxt: {fileID: 223840104}
   timeTxt: {fileID: 276723282}
   matchingTxt: {fileID: 1482615867}
+  timePenalty: {fileID: 3743978411248408890, guid: a598361e59cf1d249a91d25ff2be1a8b, type: 3}
   matching: 0
 --- !u!4 &757904570
 Transform:
