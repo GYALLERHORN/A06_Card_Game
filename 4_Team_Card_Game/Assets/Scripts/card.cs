@@ -18,7 +18,7 @@ public class card : MonoBehaviour
 
     public void OpenCard()
     {
-        //GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 재생
+        GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 재생
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
 
