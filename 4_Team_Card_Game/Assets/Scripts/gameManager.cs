@@ -20,12 +20,12 @@ public class gameManager : MonoBehaviour
     public GameObject endTxt;
     public Text timeTxt;
     public Text matchingTxt;
-    public GameObject timePenalty;
+    public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
 
-    public Animator anim;
-    public AudioSource audioSource;
-    public AudioClip matchedSound;
-    public AudioClip unmatchedSound;
+    public Animator anim; // timeTxt 애니메이션 전환
+    public AudioSource audioSource; // GM오디오소스
+    public AudioClip matchedSound; // 카드 두개가 일치할 때 소리
+    public AudioClip unmatchedSound; // 카드 두개가 다를 때 소리
 
 
 
@@ -96,7 +96,7 @@ public class gameManager : MonoBehaviour
             secondCard.GetComponent<card>().CloseCard();
 
             time -= 3.0f;
-            GameObject penalty = Instantiate(timePenalty);
+            GameObject penalty = Instantiate(timePenalty); // 제한시간에서 3초 까기
             Destroy(penalty, 0.5f);
         }
 
