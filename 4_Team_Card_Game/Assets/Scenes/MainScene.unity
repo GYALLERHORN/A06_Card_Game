@@ -438,6 +438,9 @@ MonoBehaviour:
   matchedSound: {fileID: 8300000, guid: 61ed0d333e504874dbbc63b111beadbd, type: 3}
   unmatchedSound: {fileID: 8300000, guid: d087d85d7676f0d4898c4ebc0a17d526, type: 3}
   matching: 0
+  numOfMatcing: 0
+  NOM: {fileID: 0}
+  score: 0
   countDownTxt: {fileID: 1619475342}
 --- !u!4 &757904570
 Transform:
