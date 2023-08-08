@@ -159,12 +159,6 @@ public class gameManager : MonoBehaviour
             }
         }
 
-
-        Time.timeScale = 0.0f;
-        endTxt.SetActive(true);
-        time = 0f;
-
-
         if (PlayerPrefs.HasKey("bestScore") == false)
         {
             PlayerPrefs.SetFloat("bestScore", time);
