@@ -124,7 +124,7 @@ public class gameManager : MonoBehaviour
     //카운트 다운
 
     public Text countDownTxt;
-
+    public GameObject countDownGO;
     bool isCountingDown = false; // 카운트다운 중인지 여부를 나타내는 변수
 
     public void StartCountDown()
@@ -143,6 +143,8 @@ public class gameManager : MonoBehaviour
         while (count > 0 && isCountingDown)
         {
             count -= Time.deltaTime;
+            countDownGO.SetActive(true);
+            countDownTxt.text = count.ToString("N0") + "초 안에 뒤집으세요!";
             yield return null;
         }
 
@@ -155,6 +157,8 @@ public class gameManager : MonoBehaviour
 
         // 카운트 완료 후 초기화
         count = initialCount;
+        countDownGO.SetActive(false);
+        countDownTxt.text = count.ToString("N0") + "초 안에 뒤집으세요!";
         isCountingDown = false;
 
 
