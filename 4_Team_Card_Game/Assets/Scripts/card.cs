@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class card : MonoBehaviour
 {
-  
+    public AudioSource audioSource;
+    public AudioClip draw;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,10 @@ public class card : MonoBehaviour
 
     public void OpenCard()
     {
-        GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 재생
+        audioSource.PlayOneShot(draw);
+
+        audioSource.
+        GetComponent<Animator>().SetTrigger("IsSelect"); // ?�니메이???�생
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
 
