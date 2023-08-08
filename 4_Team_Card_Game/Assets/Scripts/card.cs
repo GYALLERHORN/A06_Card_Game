@@ -22,7 +22,7 @@ public class card : MonoBehaviour
 
     public void OpenCard()
     {
-
+        gameManager.I.numOfMatcing++;
         audioSource.PlayOneShot(draw);
 
         audioSource.

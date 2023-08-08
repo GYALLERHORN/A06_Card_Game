@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     public GameObject endTxt;
     public Text timeTxt;
     public Text matchingTxt;
+    public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
 
     public Animator anim; // timeTxt 애니메이션 전환
@@ -32,8 +33,11 @@ public class gameManager : MonoBehaviour
     bool ShowHint = false;
 
     public int matching = 0; // mathing number
+    public int numOfMatcing = 0; //매칭 시도 횟수
+    public Text NOM; //매칭 시도 횟수 텍스트
+    public int score = 0;
     float time = 30.0f;
-
+    
 
     void Awake()
     {
@@ -78,6 +82,9 @@ public class gameManager : MonoBehaviour
             matching += 1;
             matchingTxt.text = "성공 횟수 : " + matching.ToString();
 
+            //스코어 부분
+            score += 100;
+
             MakeMatchText("이름");
 
             firstCard.GetComponent<card>().DestroyCard();
@@ -95,6 +102,8 @@ public class gameManager : MonoBehaviour
 
 
             MakeMatchText("실패");
+
+            score -= 50;
 
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
@@ -122,13 +131,14 @@ public class gameManager : MonoBehaviour
         if (time <= 0.0f)
         {
             GameEnd();
-
         }
     }
 
     void GameEnd()
     {
         anim.SetBool("under10seconds", false);
+
+        endText.text = "끝!\n" + "시도 횟수 : " + numOfMatcing;
 
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
