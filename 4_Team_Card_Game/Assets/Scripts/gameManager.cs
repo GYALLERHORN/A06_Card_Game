@@ -95,6 +95,44 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
         time = 0f;
+    }
+
+
+
+    //카운트 다운
+
+    public Text countDownTxt;
+
+    bool isCountingDown = false; // 카운트다운 중인지 여부를 나타내는 변수
+
+    public void StartCountDown()
+    {
+        isCountingDown = true; // 카운트다운 시작
+        StartCoroutine(CountDownCoroutine());
         
+    }
+
+    IEnumerator CountDownCoroutine()
+    {
+        float initialCount = 2f; // 초기 카운트 값
+        float count = initialCount;
+        
+
+        while (count > 0 && isCountingDown)
+        {
+            count -= Time.deltaTime;
+            yield return null;
+        }
+
+        // 카운트가 0이 되면 카드 다시 뒤집기
+        if (count <= 0)
+        {
+            firstCard.GetComponent<card>().CloseCard();
+            firstCard = null;
+        }
+
+        // 카운트 완료 후 초기화
+        count = initialCount;
+        isCountingDown = false;
     }
 }
