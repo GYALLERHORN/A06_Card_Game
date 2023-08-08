@@ -12,12 +12,14 @@ public class gameManager : MonoBehaviour
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
+
     public GameObject endTxt;
     public Text timeTxt;
     public Text matchingTxt;
 
-    public int matching = 0; // ¼º°ø È½¼ö
+    public int matching = 0; // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½
     float time = 30.0f;
+
 
     void Awake()
     {
@@ -53,9 +55,9 @@ public class gameManager : MonoBehaviour
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         if (firstCardImage == secondCardImage)
         {
-            //Ä«µå ¸ÅÄª ¼º°ø È½¼ö ºÎºÐ
+            //Ä«ï¿½ï¿½ ï¿½ï¿½Äª ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ ï¿½Îºï¿½
             matching += 1;
-            matchingTxt.text = "¼º°ø È½¼ö : " + matching.ToString();
+            matchingTxt.text = "ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ : " + matching.ToString();
 
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
@@ -79,17 +81,19 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         time -= Time.deltaTime;
+
         timeTxt.text = time.ToString("N2");
         if(timeTxt.text == "0.00")
         {
             GameEnd();
+
         }
     }
 
     void GameEnd()
     {
         Time.timeScale = 0.0f;
-        endTxt.SetActive(true); // ¿£µå ÅØ½ºÆ®
+        endTxt.SetActive(true); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
         time = 0f;
         
     }
