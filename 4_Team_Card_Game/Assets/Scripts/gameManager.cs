@@ -20,6 +20,8 @@ public class gameManager : MonoBehaviour
     public GameObject endTxt;
     public Text timeTxt;
     public Text matchingTxt;
+    public GameObject timePenalty;
+
 
     public int matching = 0; // mathing number
     float time = 30.0f;
@@ -48,6 +50,7 @@ public class gameManager : MonoBehaviour
 
             newCard.transform.position = new Vector3(x, y, 0);
 
+
             string rtanName = "rtan" + rtans[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(rtanName);
         }
@@ -68,9 +71,6 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
 
-
-
-
             int leftCards = GameObject.Find("cards").transform.childCount;
             if (leftCards == 2)
             {
@@ -84,6 +84,10 @@ public class gameManager : MonoBehaviour
 
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
+
+            time -= 3.0f;
+            GameObject penalty = Instantiate(timePenalty);
+            Destroy(penalty, 0.5f);
         }
 
         firstCard = null;
@@ -95,7 +99,7 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
 
         timeTxt.text = time.ToString("N2");
-        if (timeTxt.text == "0.00")
+        if (time <= 0.0f)
         {
             GameEnd();
 
