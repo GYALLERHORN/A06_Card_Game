@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text matchingTxt;
 
-    public int matching = 0; // ���� Ƚ��
+    public int matching = 0; // mathing number
     float time = 30.0f;
 
 
@@ -55,9 +55,9 @@ public class gameManager : MonoBehaviour
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         if (firstCardImage == secondCardImage)
         {
-            //ī�� ��Ī ���� Ƚ�� �κ�
+            //card matching system
             matching += 1;
-            matchingTxt.text = "���� Ƚ�� : " + matching.ToString();
+            matchingTxt.text = "성공 횟수 : " + matching.ToString();
 
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
@@ -93,7 +93,7 @@ public class gameManager : MonoBehaviour
     void GameEnd()
     {
         Time.timeScale = 0.0f;
-        endTxt.SetActive(true); // ���� �ؽ�Ʈ
+        endTxt.SetActive(true);
         time = 0f;
         
     }
