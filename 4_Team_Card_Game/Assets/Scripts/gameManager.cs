@@ -35,7 +35,7 @@ public class gameManager : MonoBehaviour
 
     public int matching = 0; // mathing number
     public int numOfMatcing = 0; //매칭 시도 횟수
-    public Text NOM; //매칭 시도 횟수 텍스트
+    public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
     float time = 30.0f;
     
@@ -144,6 +144,7 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        StopCountDown();
         anim.SetBool("under10seconds", false);
 
         if (PlayerPrefs.HasKey("bestScore") == false)
@@ -157,19 +158,36 @@ public class gameManager : MonoBehaviour
                 PlayerPrefs.SetFloat("bestScore", time);
             }
         }
-        //endText.text = "끝!\n" + "시도 횟수 : " + numOfMatcing;
+
 
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
         time = 0f;
 
+
+        if (PlayerPrefs.HasKey("bestScore") == false)
+        {
+            PlayerPrefs.SetFloat("bestScore", time);
+        }
+        else
+        {
+            if (time > PlayerPrefs.GetFloat("bestScore"))
+            {
+                PlayerPrefs.SetFloat("bestScore", time);
+            }
+        }
+
         float maxScore = PlayerPrefs.GetFloat("bestScore");
-        maxScoreTxt.text = "최고기록 :" + " " + maxScore.ToString("N2");
+        maxScoreTxt.text = "최고기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
+
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
+
+        time = 0f;
+
     }
 
 
