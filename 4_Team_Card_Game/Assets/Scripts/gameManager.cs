@@ -35,7 +35,7 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        int[] rtans = new int[] { 0, 0, 1, 1, 2, 2, 3, 3};
+        int[] rtans = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
         for (int i = 0; i < 8; i++)
@@ -95,7 +95,7 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
 
         timeTxt.text = time.ToString("N2");
-        if(timeTxt.text == "0.00")
+        if (timeTxt.text == "0.00")
         {
             GameEnd();
 
@@ -107,17 +107,46 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0.0f;
         endTxt.SetActive(true);
         time = 0f;
-        
+
     }
 
     // 카드 매치 시도시 텍스트 출력
-    // target = 텍스트 나올 오브젝트, text = 나올 글자정
+    // target = 텍스트 나올 오브젝트, text = 나올 글자
     // 이미지 변경후 이름 나오게 수정
     void MakeMatchText(string text)
     {
+        string name = SelectName(text);
+
         GameObject firstCardText = Instantiate(MatchText, firstCard.transform.position, Quaternion.identity);
         GameObject secondCardText = Instantiate(MatchText, secondCard.transform.position, Quaternion.identity);
-        firstCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = text;
-        secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = text;
+        firstCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
+        secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
+    }
+
+    // 이름 구별 함수 (아직 미완성)
+    string SelectName(string text)
+    {
+        string name;
+
+        switch (text)
+        {
+            case "0":
+                name = "김호연";
+                break;
+            case "1":
+                name = "김진성";
+                break;
+            case "2":
+                name = "곽민규";
+                break;
+            case "3":
+                name = "노재우";
+                break;
+            default:
+                name = "로그";
+                Debug.Log("이름 입력 실패");
+                break;
+        }
+        return name;
     }
 }
