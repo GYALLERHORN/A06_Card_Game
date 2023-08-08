@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.UIElements;
 
 
 public class gameManager : MonoBehaviour
@@ -18,7 +19,8 @@ public class gameManager : MonoBehaviour
     [SerializeField]
     GameObject MatchText;
 
-    public GameObject endTxt;
+    public GameObject endPanel;
+    public Text maxScoreTxt;
     public Text timeTxt;
     public Text matchingTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
@@ -27,7 +29,6 @@ public class gameManager : MonoBehaviour
     public AudioSource audioSource; // GM오디오소스
     public AudioClip matchedSound; // 카드 두개가 일치할 때 소리
     public AudioClip unmatchedSound; // 카드 두개가 다를 때 소리
-
 
     bool ShowHint = false;
 
@@ -43,6 +44,8 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // time 이 게임 시작시 초기화될 수 있게 start로 옮김
+        time = 30f;
         Time.timeScale = 1.0f;
         ShowHint = false;
 
@@ -87,6 +90,11 @@ public class gameManager : MonoBehaviour
             if (leftCards == 2)
             {
                 Invoke("GameEnd", 0.5f);
+
+                if (PlayerPrefs.GetInt("stage") > PlayerPrefs.GetInt("level"))
+                {
+                    PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("stage"));
+                }
             }
         }
         else
@@ -130,10 +138,25 @@ public class gameManager : MonoBehaviour
     {
         anim.SetBool("under10seconds", false);
 
-        Time.timeScale = 0.0f;
-        endTxt.SetActive(true);
-        time = 0f;
+        if (PlayerPrefs.HasKey("bestScore") == false)
+        {
+            PlayerPrefs.SetFloat("bestScore", time);
+        }
+        else
+        {
+            if (time > PlayerPrefs.GetFloat("bestScore"))
+            {
+                PlayerPrefs.SetFloat("bestScore", time);
+            }
+        }
 
+        float maxScore = PlayerPrefs.GetFloat("bestScore");
+        maxScoreTxt.text = "최고기록 :" + " " + maxScore.ToString("N2");
+
+        // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
+        endPanel.SetActive(true);
+        maxScoreTxt.gameObject.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 
 
