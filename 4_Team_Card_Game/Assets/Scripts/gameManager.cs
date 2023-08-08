@@ -22,6 +22,8 @@ public class gameManager : MonoBehaviour
     public Text matchingTxt;
     public GameObject timePenalty;
 
+    public Animator anim;
+
 
     public int matching = 0; // mathing number
     float time = 30.0f;
@@ -99,6 +101,10 @@ public class gameManager : MonoBehaviour
         time -= Time.deltaTime;
 
         timeTxt.text = time.ToString("N2");
+        if (time <= 10.0f)
+        {
+            anim.SetBool("under10seconds", true);
+        }
         if (time <= 0.0f)
         {
             GameEnd();
@@ -153,6 +159,8 @@ public class gameManager : MonoBehaviour
 
 
         
+        anim.SetBool("under10seconds", false);
+        // timeTxt.gameObject.GetComponent<Text>().color = Color.red; 종료 타이밍에 timeTxt빨간색 하고 싶은데 어떻게 합니까?
     }
 
     // 카드 매치 시도시 텍스트 출력
