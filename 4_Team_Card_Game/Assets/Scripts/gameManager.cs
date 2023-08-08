@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
+    public GameObject countDownGO;
 
     [SerializeField]
     GameObject MatchText;
@@ -79,7 +80,7 @@ public class gameManager : MonoBehaviour
         }
         else
         {
-
+            
             MakeMatchText("실패");
 
             firstCard.GetComponent<card>().CloseCard();
@@ -90,6 +91,7 @@ public class gameManager : MonoBehaviour
             Destroy(penalty, 0.5f);
         }
 
+        StopCountDown();
         firstCard = null;
         secondCard = null;
     }
@@ -118,9 +120,15 @@ public class gameManager : MonoBehaviour
     //카운트 다운
 
     public Text countDownTxt;
-    public GameObject countDownGO;
+    
     bool isCountingDown = false; // 카운트다운 중인지 여부를 나타내는 변수
 
+    public void StopCountDown()
+    {
+        StopAllCoroutines();
+        countDownGO.SetActive(false);
+        isCountingDown = false;
+    }
     public void StartCountDown()
     {
         isCountingDown = true; // 카운트다운 시작
@@ -145,8 +153,15 @@ public class gameManager : MonoBehaviour
         // 카운트가 0이 되면 카드 다시 뒤집기
         if (count <= 0)
         {
-            firstCard.GetComponent<card>().CloseCard();
-            firstCard = null;
+            
+
+            if (firstCard != null && secondCard == null)
+            {
+                firstCard.GetComponent<card>().CloseCard();
+                firstCard = null;
+                secondCard = null;
+            }
+            
         }
 
         // 카운트 완료 후 초기화
@@ -154,9 +169,6 @@ public class gameManager : MonoBehaviour
         countDownGO.SetActive(false);
         countDownTxt.text = count.ToString("N0") + "초 안에 뒤집으세요!";
         isCountingDown = false;
-
-
-        
     }
 
     // 카드 매치 시도시 텍스트 출력
