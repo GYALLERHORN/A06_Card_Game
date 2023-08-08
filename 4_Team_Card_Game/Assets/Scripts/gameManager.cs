@@ -125,14 +125,14 @@ public class gameManager : MonoBehaviour
     {
         isCountingDown = true; // 카운트다운 시작
         StartCoroutine(CountDownCoroutine());
-        
+
     }
 
     IEnumerator CountDownCoroutine()
     {
         float initialCount = 2f; // 초기 카운트 값
         float count = initialCount;
-        
+
 
         while (count > 0 && isCountingDown)
         {
@@ -151,6 +151,9 @@ public class gameManager : MonoBehaviour
         count = initialCount;
         isCountingDown = false;
 
+
+        
+    }
 
     // 카드 매치 시도시 텍스트 출력
     // target = 텍스트 나올 오브젝트, text = 나올 글자
@@ -184,7 +187,7 @@ public class gameManager : MonoBehaviour
             case "3":
                 name = "노재우";
                 break;
-            case "실패" :
+            case "실패":
                 name = "실패";
                 break;
             default:
