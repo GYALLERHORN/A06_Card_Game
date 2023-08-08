@@ -48,5 +48,6 @@ public class card : MonoBehaviour
     {
         transform.Find("front").gameObject.SetActive(false);
         transform.Find("back").gameObject.SetActive(true);
+        transform.Find("back").gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 }
