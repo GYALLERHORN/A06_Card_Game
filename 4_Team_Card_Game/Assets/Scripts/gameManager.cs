@@ -42,6 +42,8 @@ public class gameManager : MonoBehaviour
     public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
 
+    public bool IsStartAniOff = false; //  !중요! 시작 애니메이션 끝나기 전에는 이벤트 발생 안되게 방어코드 작성 true가 
+
     float time;
 
 
@@ -52,14 +54,9 @@ public class gameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-<<<<<<< HEAD
     {
         List<GameObject> cardsArr = new List<GameObject>();
-
-=======
-    { 
         Debug.Log(PlayerPrefs.GetInt("level"));
->>>>>>> main
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
         Time.timeScale = 1.0f;
@@ -153,17 +150,20 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
-        time -= Time.deltaTime;
+        if (IsStartAniOff == true) // 등장 애니메이션 끝났는지 확인하는 조건문
+        {
+            time -= Time.deltaTime;
 
-        timeTxt.text = time.ToString("N2");
-        if (time <= 10.0f)
-        {
-            anim.SetBool("under10seconds", true);
-            ShowMeTheHint();
-        }
-        if (time <= 0.0f)
-        {
-            GameEnd();
+            timeTxt.text = time.ToString("N2");
+            if (time <= 10.0f)
+            {
+                anim.SetBool("under10seconds", true);
+                ShowMeTheHint();
+            }
+            if (time <= 0.0f)
+            {
+                GameEnd();
+            }
         }
     }
 
@@ -344,18 +344,20 @@ public class gameManager : MonoBehaviour
     }
 
 
-    //newCard.SetActive(false);
-    //List<GameObject> cardsArr = new List<GameObject>();
-    //cardsArr.Add(newCard);
-    //StartCoroutine("AppearCard", cardsArr);
+    //시작 애니매이션 함수
 
     IEnumerator AppearCard(List<GameObject> cardsArr)
     {
+        IsStartAniOff = false;
         for (int num = 0; num < cardsArr.Count; num++)
         {
             yield return new WaitForSeconds(0.15f);
             cardsArr[num].SetActive(true);
             cardsArr[num].GetComponent<Animator>().SetTrigger("IsAppear");
+            if (num == cardsArr.Count-1)
+            {
+                IsStartAniOff = true;
+            }
         }
     }
 }

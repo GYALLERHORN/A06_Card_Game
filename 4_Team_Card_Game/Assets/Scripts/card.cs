@@ -8,49 +8,44 @@ public class card : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip draw;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OpenCard()
     {
-        if (Time.timeScale == 0)
+        if (gameManager.I.IsStartAniOff == true)
         {
-            return;
-        }
-        gameManager.I.numOfMatcing++;
-        audioSource.PlayOneShot(draw);
+            if (Time.timeScale == 0)
+            {
+                return;
+            }
+            gameManager.I.numOfMatcing++;
+            audioSource.PlayOneShot(draw);
 
-        audioSource.
-        
-        GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 생성
+            audioSource.
 
-        transform.Find("front").gameObject.SetActive(true);
-        transform.Find("back").gameObject.SetActive(false);
+            GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 생성
 
-        if (gameManager.I.firstCard == null)
-        {
-            gameManager.I.firstCard = gameObject;
-            gameManager.I.StartCountDown();
-        }
-        else
-        {
-            gameManager.I.secondCard = gameObject;
-            gameManager.I.IsMatched();
+            transform.Find("front").gameObject.SetActive(true);
+            transform.Find("back").gameObject.SetActive(false);
+
+            if (gameManager.I.firstCard == null)
+            {
+                gameManager.I.firstCard = gameObject;
+                gameManager.I.StartCountDown();
+            }
+            else
+            {
+                gameManager.I.secondCard = gameObject;
+                gameManager.I.IsMatched();
+            }
         }
     }
 
     public void DestroyCard()
     {
-        Invoke("DestroyCardInvoke",0.5f);
+        Invoke("DestroyCardInvoke", 0.5f);
     }
     public void DestroyCardInvoke()
     {
@@ -58,8 +53,8 @@ public class card : MonoBehaviour
     }
     public void CloseCard()
     {
-        Invoke("CloseCardInvoke",0.5f);
-        
+        Invoke("CloseCardInvoke", 0.5f);
+
     }
     public void CloseCardInvoke()
     {
