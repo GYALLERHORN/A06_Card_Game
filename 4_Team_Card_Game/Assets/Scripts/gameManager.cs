@@ -24,7 +24,9 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text matchingTxt;
     public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
+    public Text scoreTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
+    
 
     public Animator anim; // timeTxt 애니메이션 전환
     public AudioSource audioSource; // GM오디오소스
@@ -197,9 +199,6 @@ public class gameManager : MonoBehaviour
         scoreTxt.text = "Score : " + score.ToString();
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
-
-        time = 0f;
-
     }
 
 
