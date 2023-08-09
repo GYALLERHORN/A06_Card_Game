@@ -286,9 +286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alert: {fileID: 1699605317}
-  stage1: {fileID: 199951842}
-  stage2: {fileID: 1466665887}
-  stage3: {fileID: 1212176863}
 --- !u!1 &426715735
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,9 +778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alert: {fileID: 1699605317}
-  stage1: {fileID: 199951842}
-  stage2: {fileID: 1466665887}
-  stage3: {fileID: 1212176863}
 --- !u!1 &1304252786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,9 +1205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alert: {fileID: 1699605317}
-  stage1: {fileID: 199951842}
-  stage2: {fileID: 1466665887}
-  stage3: {fileID: 1212176863}
 --- !u!1 &1699605317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,9 +1312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alert: {fileID: 1699605317}
-  stage1: {fileID: 0}
-  stage2: {fileID: 0}
-  stage3: {fileID: 0}
 --- !u!95 &1699605324
 Animator:
   serializedVersion: 5
