@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject endPanel;
     public Text maxScoreTxt;
+    public Text scoreTxt; // 기록이 아닌 점수 텍스트
     public Text timeTxt;
     public Text matchingTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
@@ -37,8 +38,9 @@ public class gameManager : MonoBehaviour
     public int numOfMatcing = 0; //매칭 시도 횟수
     public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
+
     float time;
-    
+
 
     void Awake()
     {
@@ -48,6 +50,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
         Time.timeScale = 1.0f;
@@ -87,7 +90,7 @@ public class gameManager : MonoBehaviour
             //스코어 부분
             score += 100;
 
-            MakeMatchText("이름");
+            MakeMatchText(firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name);
 
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
@@ -109,8 +112,7 @@ public class gameManager : MonoBehaviour
 
 
             MakeMatchText("실패");
-
-            score -= 50;
+            score -= 10;
 
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
@@ -150,6 +152,7 @@ public class gameManager : MonoBehaviour
         StopCountDown();
         anim.SetBool("under10seconds", false);
 
+
         if (PlayerPrefs.HasKey("bestScore") == false)
         {
             PlayerPrefs.SetFloat("bestScore", time);
@@ -164,7 +167,7 @@ public class gameManager : MonoBehaviour
 
         float maxScore = PlayerPrefs.GetFloat("bestScore");
         maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
-        
+
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
@@ -245,23 +248,35 @@ public class gameManager : MonoBehaviour
         secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
     }
 
-    // 이름 구별 함수 (아직 미완성)
-    string SelectName(string text)
+    // 이름 구별 함수 스프라이트 이름 절대 지켜!
+    string SelectName(string spriteName)
     {
         string name;
 
-        switch (text)
+        switch (spriteName)
         {
-            case "0":
+            case "member0":
                 name = "김호연";
                 break;
-            case "1":
+            case "member4":
+                name = "김호연";
+                break;
+            case "member1":
                 name = "김진성";
                 break;
-            case "2":
+            case "member5":
+                name = "김진성";
+                break;
+            case "member2":
                 name = "곽민규";
                 break;
-            case "3":
+            case "member6":
+                name = "곽민규";
+                break;
+            case "member3":
+                name = "노재우";
+                break;
+            case "member7":
                 name = "노재우";
                 break;
             case "실패":
@@ -269,7 +284,7 @@ public class gameManager : MonoBehaviour
                 break;
             default:
                 name = "로그봐";
-                //Debug.Log("이름 입력 실패");
+                Debug.Log("이름 입력 실패");
                 break;
         }
         return name;
