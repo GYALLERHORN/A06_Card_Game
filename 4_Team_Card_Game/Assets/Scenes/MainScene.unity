@@ -434,6 +434,8 @@ MonoBehaviour:
   scoreTxt: {fileID: 1425784882}
   timeTxt: {fileID: 276723282}
   matchingTxt: {fileID: 1482615867}
+  endText: {fileID: 0}
+  scoreTxt: {fileID: 1425784882}
   timePenalty: {fileID: 3743978411248408890, guid: a598361e59cf1d249a91d25ff2be1a8b, type: 3}
   anim: {fileID: 276723284}
   audioSource: {fileID: 757904571}
@@ -443,6 +445,7 @@ MonoBehaviour:
   numOfMatcing: 0
   NOM: {fileID: 0}
   score: 0
+  stageLevel: 1
   countDownTxt: {fileID: 1619475342}
 --- !u!4 &757904570
 Transform:
@@ -929,7 +932,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2087108812cf957438cd5848a9f6e776, type: 3}
+    m_Font: {fileID: 12800000, guid: 2f825c8a7ecccf84db9bdc0ac05c9c4b, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -1008,7 +1011,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2087108812cf957438cd5848a9f6e776, type: 3}
+    m_Font: {fileID: 12800000, guid: 2f825c8a7ecccf84db9bdc0ac05c9c4b, type: 3}
     m_FontSize: 60
     m_FontStyle: 1
     m_BestFit: 0
@@ -1087,7 +1090,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2087108812cf957438cd5848a9f6e776, type: 3}
+    m_Font: {fileID: 12800000, guid: 2f825c8a7ecccf84db9bdc0ac05c9c4b, type: 3}
     m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 0
