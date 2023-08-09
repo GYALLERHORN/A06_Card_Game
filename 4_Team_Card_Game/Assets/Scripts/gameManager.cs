@@ -168,11 +168,10 @@ public class gameManager : MonoBehaviour
         float maxScore = PlayerPrefs.GetFloat("bestScore");
         maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
 
-
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
         maxScoreTxt.gameObject.SetActive(true);
-        Invoke("timestop", 0.5f);
+        Time.timeScale = 0.0f;
     }
 
 
@@ -182,11 +181,7 @@ public class gameManager : MonoBehaviour
     public Text countDownTxt;
 
     bool isCountingDown = false; // 카운트다운 중인지 여부를 나타내는 변수
-
-    void timestop()
-    {
-        Time.timeScale = 0.0f;
-    }
+        
     public void StopCountDown()
     {
         StopAllCoroutines();
