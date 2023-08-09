@@ -42,7 +42,7 @@ public class gameManager : MonoBehaviour
     public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
 
-    public bool IsStartAniOff = false; //  !중요! 시작 애니메이션 끝나기 전에는 이벤트 발생 안되게 방어코드 작성 true가 
+    public bool IsStartAniOff = false; //  !중요! 시작 애니메이션 끝나기 전에는 이벤트 발생 안되게 방어코드 작성
 
     float time;
 
@@ -55,7 +55,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<GameObject> cardsArr = new List<GameObject>();
+        List<GameObject> cardsArr = new List<GameObject>(); // 시작 애니메이션
         Debug.Log(PlayerPrefs.GetInt("level"));
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
@@ -78,7 +78,7 @@ public class gameManager : MonoBehaviour
         for (int i = 0; i < members.Length; i++)
         {
             GameObject newCard = Instantiate(card);
-            cardsArr.Add(newCard);
+            cardsArr.Add(newCard); // 시작 애니메이션
             newCard.transform.parent = GameObject.Find("cards").transform;
 
             float x = i % 4 * 1.4f - 2.1f;
@@ -89,9 +89,9 @@ public class gameManager : MonoBehaviour
 
             string memberName = "member" + members[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(memberName);
-            newCard.SetActive(false);
+            newCard.SetActive(false); // 시작 애니메이션 
         }
-        StartCoroutine("AppearCard", cardsArr);
+        StartCoroutine("AppearCard", cardsArr); // 시작 애니메이션
 
     }
 
