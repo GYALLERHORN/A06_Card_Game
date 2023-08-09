@@ -444,7 +444,7 @@ MonoBehaviour:
   numOfMatcing: 0
   NOM: {fileID: 0}
   score: 0
-  IsAniOff: 0
+  IsStartAniOff: 0
   countDownTxt: {fileID: 1619475342}
 --- !u!4 &757904570
 Transform:

@@ -356,6 +356,7 @@ public class gameManager : MonoBehaviour
             cardsArr[num].GetComponent<Animator>().SetTrigger("IsAppear");
             if (num == cardsArr.Count-1)
             {
+                yield return new WaitForSeconds(0.3f);
                 IsStartAniOff = true;
             }
         }
