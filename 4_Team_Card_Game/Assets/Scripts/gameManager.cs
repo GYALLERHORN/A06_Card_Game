@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.UIElements;
+using UnityEngine.EventSystems;
 
 
 public class gameManager : MonoBehaviour
@@ -73,7 +74,6 @@ public class gameManager : MonoBehaviour
 
     public void IsMatched()
     {
-
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         if (firstCardImage == secondCardImage)
@@ -143,6 +143,10 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        if (0f > time)
+        {
+            timeTxt.text = "0.00";
+        }
         StopCountDown();
         anim.SetBool("under10seconds", false);
 
@@ -165,7 +169,7 @@ public class gameManager : MonoBehaviour
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
         maxScoreTxt.gameObject.SetActive(true);
-        Time.timeScale = 0.0f;
+        Invoke("timestop", 0.5f);
     }
 
 
@@ -176,12 +180,12 @@ public class gameManager : MonoBehaviour
 
     bool isCountingDown = false; // 카운트다운 중인지 여부를 나타내는 변수
 
+    void timestop()
+    {
+        Time.timeScale = 0.0f;
+    }
     public void StopCountDown()
     {
-        if (0f > time)
-        {
-            time = 0f;
-        }
         StopAllCoroutines();
         countDownGO.SetActive(false);
         isCountingDown = false;

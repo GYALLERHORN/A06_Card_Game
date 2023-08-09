@@ -22,6 +22,10 @@ public class card : MonoBehaviour
 
     public void OpenCard()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
         gameManager.I.numOfMatcing++;
         audioSource.PlayOneShot(draw);
 
