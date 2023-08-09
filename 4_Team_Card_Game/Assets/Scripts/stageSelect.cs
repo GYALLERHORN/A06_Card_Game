@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,10 +31,6 @@ public class stageSelect : MonoBehaviour
             PlayerPrefs.SetFloat("bestScore", 0f);
         }
     }
-    public void stageChoose()
-    {
-        SceneManager.LoadScene("StageSelect");
-    }                                         
     public void s1()
     {
         PlayerPrefs.SetInt("stageLevel", 1);

@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 using UnityEditor.Experimental.RestService;
 using System;
+using Unity.VisualScripting;
 
 public class gameManager : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class gameManager : MonoBehaviour
     public Text scoreTxt; // 기록이 아닌 점수 텍스트
     public Text timeTxt;
     public Text matchingTxt;
-    public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
     
 
@@ -61,7 +61,6 @@ public class gameManager : MonoBehaviour
 
         int[] members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
         
-
         if (PlayerPrefs.GetInt("stageLevel") == 2)
         {
             members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
@@ -87,6 +86,7 @@ public class gameManager : MonoBehaviour
             string memberName = "member" + members[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(memberName);
         }
+
     }
 
 
@@ -332,5 +332,21 @@ public class gameManager : MonoBehaviour
         PlayerPrefs.SetInt("level", 0);
         PlayerPrefs.SetInt("stageLevel", 0);
         PlayerPrefs.SetFloat("bestScore", 0f);
+    }
+
+
+    //newCard.SetActive(false);
+    //List<GameObject> cardsArr = new List<GameObject>();
+    //cardsArr.Add(newCard);
+    //StartCoroutine("AppearCard", cardsArr);
+
+    IEnumerator AppearCard(List<GameObject> cardsArr)
+    {
+        for (int num = 0; num < cardsArr.Count; num++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            cardsArr[num].SetActive(true);
+            cardsArr[num].GetComponent<Animator>().SetTrigger("IsAppear");
+        }
     }
 }
