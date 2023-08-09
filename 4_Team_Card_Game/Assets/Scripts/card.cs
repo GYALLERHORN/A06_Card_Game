@@ -23,8 +23,6 @@ public class card : MonoBehaviour
             gameManager.I.numOfMatcing++;
             audioSource.PlayOneShot(draw);
 
-            audioSource.
-
             GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 생성
 
             transform.Find("front").gameObject.SetActive(true);
