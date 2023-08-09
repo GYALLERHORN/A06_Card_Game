@@ -85,6 +85,13 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
 
+<<<<<<< Updated upstream
+=======
+
+            float penaltyReduce = -1.0f;
+            timePenalty.transform.Find("Canvas").Find("timePenaltyTxt").gameObject.GetComponent<Text>().text = penaltyReduce.ToString("N0"); ;
+            time += penaltyReduce;
+>>>>>>> Stashed changes
             GameObject penalty = Instantiate(timePenalty); // 제한시간에서 3초 까기
             Destroy(penalty, 0.5f);
             float reducePenalty = -1.0f;
