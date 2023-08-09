@@ -435,7 +435,6 @@ MonoBehaviour:
   scoreTxt: {fileID: 1425784882}
   timeTxt: {fileID: 276723282}
   matchingTxt: {fileID: 1482615867}
-  endText: {fileID: 0}
   timePenalty: {fileID: 3743978411248408890, guid: a598361e59cf1d249a91d25ff2be1a8b, type: 3}
   anim: {fileID: 276723284}
   audioSource: {fileID: 757904571}
@@ -642,8 +641,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 862296171}
-        m_TargetAssemblyTypeName: stageSelect, Assembly-CSharp
-        m_MethodName: stageChoose
+        m_TargetAssemblyTypeName: stageChoose, Assembly-CSharp
+        m_MethodName: moveToStageSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -704,10 +703,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 862296165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbfe57ef3d424d46a406fba56881753, type: 3}
+  m_Script: {fileID: 11500000, guid: d239b3a5e7cccb24fa8a0d742cf308e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alert: {fileID: 0}
 --- !u!1 &1050470252
 GameObject:
   m_ObjectHideFlags: 0
