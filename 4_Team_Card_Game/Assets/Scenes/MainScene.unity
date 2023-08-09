@@ -182,7 +182,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e00667b2cb319ab41b61abc8c8145315, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -435,7 +435,6 @@ MonoBehaviour:
   timeTxt: {fileID: 276723282}
   matchingTxt: {fileID: 1482615867}
   endText: {fileID: 0}
-  scoreTxt: {fileID: 1425784882}
   timePenalty: {fileID: 3743978411248408890, guid: a598361e59cf1d249a91d25ff2be1a8b, type: 3}
   anim: {fileID: 276723284}
   audioSource: {fileID: 757904571}
@@ -570,6 +569,7 @@ GameObject:
   - component: {fileID: 862296170}
   - component: {fileID: 862296169}
   - component: {fileID: 862296167}
+  - component: {fileID: 862296171}
   m_Layer: 5
   m_Name: stageSelect
   m_TagString: Untagged
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 862296171}
         m_TargetAssemblyTypeName: stageSelect, Assembly-CSharp
         m_MethodName: stageChoose
         m_Mode: 1
@@ -694,6 +694,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862296165}
   m_CullTransparentMesh: 1
+--- !u!114 &862296171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862296165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbfe57ef3d424d46a406fba56881753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alert: {fileID: 0}
 --- !u!1 &1050470252
 GameObject:
   m_ObjectHideFlags: 0

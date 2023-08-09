@@ -26,7 +26,6 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text matchingTxt;
     public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
-    public Text scoreTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
     
 
