@@ -23,7 +23,6 @@ public class gameManager : MonoBehaviour
     public Text maxScoreTxt;
     public Text timeTxt;
     public Text matchingTxt;
-    public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
 
     public Animator anim; // timeTxt 애니메이션 전환
@@ -37,7 +36,7 @@ public class gameManager : MonoBehaviour
     public int numOfMatcing = 0; //매칭 시도 횟수
     public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
-    float time = 30.0f;
+    float time;
     
 
     void Awake()
@@ -159,29 +158,14 @@ public class gameManager : MonoBehaviour
             }
         }
 
-        if (PlayerPrefs.HasKey("bestScore") == false)
-        {
-            PlayerPrefs.SetFloat("bestScore", time);
-        }
-        else
-        {
-            if (time > PlayerPrefs.GetFloat("bestScore"))
-            {
-                PlayerPrefs.SetFloat("bestScore", time);
-            }
-        }
-
         float maxScore = PlayerPrefs.GetFloat("bestScore");
         maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
-
+        
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
-
-        time = 0f;
-
     }
 
 
@@ -194,6 +178,10 @@ public class gameManager : MonoBehaviour
 
     public void StopCountDown()
     {
+        if (0f > time)
+        {
+            time = 0f;
+        }
         StopAllCoroutines();
         countDownGO.SetActive(false);
         isCountingDown = false;

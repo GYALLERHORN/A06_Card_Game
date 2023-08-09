@@ -10,7 +10,7 @@ public class stageSelect : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("level") == false && PlayerPrefs.HasKey("stage"))
+        if (PlayerPrefs.HasKey("level") == false && PlayerPrefs.HasKey("stage") == false)
         {
             PlayerPrefs.SetInt("level", 0);
             PlayerPrefs.SetInt("stageLevel", 0);
