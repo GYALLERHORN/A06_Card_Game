@@ -90,7 +90,7 @@ public class gameManager : MonoBehaviour
             //스코어 부분
             score += 100;
 
-            MakeMatchText("이름");
+            MakeMatchText(firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name);
 
             firstCard.GetComponent<card>().DestroyCard();
             secondCard.GetComponent<card>().DestroyCard();
@@ -244,23 +244,35 @@ public class gameManager : MonoBehaviour
         secondCardText.transform.Find("Text").gameObject.GetComponent<Text>().text = name;
     }
 
-    // 이름 구별 함수 (아직 미완성)
-    string SelectName(string text)
+    // 이름 구별 함수 스프라이트 이름 절대 지켜!
+    string SelectName(string spriteName)
     {
         string name;
 
-        switch (text)
+        switch (spriteName)
         {
-            case "0":
+            case "khy1":
                 name = "김호연";
                 break;
-            case "1":
+            case "khy2":
+                name = "김호연";
+                break;
+            case "kjs1":
                 name = "김진성";
                 break;
-            case "2":
+            case "kjs2":
+                name = "김진성";
+                break;
+            case "kmg1":
                 name = "곽민규";
                 break;
-            case "3":
+            case "kmg2":
+                name = "곽민규";
+                break;
+            case "njw1":
+                name = "노재우";
+                break;
+            case "njw2":
                 name = "노재우";
                 break;
             case "실패":
@@ -268,7 +280,7 @@ public class gameManager : MonoBehaviour
                 break;
             default:
                 name = "로그봐";
-                //Debug.Log("이름 입력 실패");
+                Debug.Log("이름 입력 실패");
                 break;
         }
         return name;
