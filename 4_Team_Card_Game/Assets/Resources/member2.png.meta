@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:4_Team_Card_Game/Assets/Resources/member2.png.meta
 guid: 3f0f1053e03124d42a13b3b18e4474d4
+=======
+guid: da376d3cd6dbf86408f268aeba996227
+>>>>>>> main:4_Team_Card_Game/Assets/Resources/member2.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
