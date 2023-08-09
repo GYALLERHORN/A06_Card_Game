@@ -39,7 +39,7 @@ public class gameManager : MonoBehaviour
     public int score = 0;
 
     float time;
-    
+
 
     void Awake()
     {
@@ -147,7 +147,7 @@ public class gameManager : MonoBehaviour
     {
         StopCountDown();
         anim.SetBool("under10seconds", false);
-        
+
 
         if (PlayerPrefs.HasKey("bestScore") == false)
         {
@@ -163,7 +163,7 @@ public class gameManager : MonoBehaviour
 
         float maxScore = PlayerPrefs.GetFloat("bestScore");
         maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
-        
+
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
@@ -251,28 +251,28 @@ public class gameManager : MonoBehaviour
 
         switch (spriteName)
         {
-            case "khy1":
+            case "member0":
                 name = "김호연";
                 break;
-            case "khy2":
+            case "member4":
                 name = "김호연";
                 break;
-            case "kjs1":
+            case "member1":
                 name = "김진성";
                 break;
-            case "kjs2":
+            case "member5":
                 name = "김진성";
                 break;
-            case "kmg1":
+            case "member2":
                 name = "곽민규";
                 break;
-            case "kmg2":
+            case "member6":
                 name = "곽민규";
                 break;
-            case "njw1":
+            case "member3":
                 name = "노재우";
                 break;
-            case "njw2":
+            case "member7":
                 name = "노재우";
                 break;
             case "실패":
