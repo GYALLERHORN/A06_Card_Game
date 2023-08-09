@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject endPanel;
     public Text maxScoreTxt;
+    public Text scoreTxt; // 기록이 아닌 점수 텍스트
     public Text timeTxt;
     public Text matchingTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
@@ -36,6 +37,7 @@ public class gameManager : MonoBehaviour
     public int numOfMatcing = 0; //매칭 시도 횟수
     public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
+
     float time;
     
 
@@ -47,6 +49,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
         Time.timeScale = 1.0f;
@@ -109,8 +112,7 @@ public class gameManager : MonoBehaviour
 
 
             MakeMatchText("실패");
-
-            score -= 50;
+            score -= 10;
 
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
@@ -145,6 +147,7 @@ public class gameManager : MonoBehaviour
     {
         StopCountDown();
         anim.SetBool("under10seconds", false);
+        
 
         if (PlayerPrefs.HasKey("bestScore") == false)
         {
