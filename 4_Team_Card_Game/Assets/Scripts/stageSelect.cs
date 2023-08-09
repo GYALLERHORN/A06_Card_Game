@@ -15,6 +15,7 @@ public class stageSelect : MonoBehaviour
             PlayerPrefs.SetInt("level", 0);
             PlayerPrefs.SetInt("stageLevel", 0);
         }
+
         if (PlayerPrefs.GetInt("level") == 0)
         {
             stageLock("stage2");
@@ -23,6 +24,11 @@ public class stageSelect : MonoBehaviour
         {
             stageLock("stage3");
         }
+
+        if (PlayerPrefs.HasKey("bestScore"))
+        {
+            PlayerPrefs.SetFloat("bestScore", 0f);
+        }
     }
     public void stageChoose()
     {
@@ -30,7 +36,6 @@ public class stageSelect : MonoBehaviour
     }                                         
     public void s1()
     {
-        Debug.Log("stage1");
         PlayerPrefs.SetInt("stageLevel", 1);
         SceneManager.LoadScene("MainScene");
     }
@@ -38,7 +43,6 @@ public class stageSelect : MonoBehaviour
     {
         if (1 <= PlayerPrefs.GetInt("level"))
         {
-            Debug.Log("stage2");
             PlayerPrefs.SetInt("stageLevel", 2);
             SceneManager.LoadScene("MainScene");
         } else
@@ -50,7 +54,6 @@ public class stageSelect : MonoBehaviour
     {
         if (2 <= PlayerPrefs.GetInt("level"))
         {
-            Debug.Log("stage3");
             PlayerPrefs.SetInt("stageLevel", 3);
             SceneManager.LoadScene("MainScene");
         } else
