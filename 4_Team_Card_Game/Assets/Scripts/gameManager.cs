@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using System.IO;
 using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
+using UnityEditor.Experimental.RestService;
+using System;
 using Unity.VisualScripting;
 
 public class gameManager : MonoBehaviour
@@ -50,19 +52,33 @@ public class gameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+<<<<<<< HEAD
     {
         List<GameObject> cardsArr = new List<GameObject>();
 
+=======
+    { 
+        Debug.Log(PlayerPrefs.GetInt("level"));
+>>>>>>> main
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
         Time.timeScale = 1.0f;
         ShowHint = false;
 
         int[] members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
-        members = members.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+        
+        if (PlayerPrefs.GetInt("stageLevel") == 2)
+        {
+            members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
+        }
+        else if (PlayerPrefs.GetInt("stageLevel") == 3)
+        {
+            members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+        }
+        
+        members = members.OrderBy(item => UnityEngine.Random.Range(-1.0f, 1.0f)).ToArray();
 
-
-        for (int i = 0; i < GetCardCountForStage(); i++)
+        for (int i = 0; i < members.Length; i++)
         {
             GameObject newCard = Instantiate(card);
             cardsArr.Add(newCard);
@@ -82,22 +98,6 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public int stageLevel = 1;
-    int GetCardCountForStage()
-    {
-        // 각 스테이지 레벨에 따라 카드 개수를 반환하는 함수 구현
-        switch (stageLevel)
-        {
-            case 1:
-                return 8; // 스테이지 1의 카드 개수
-            case 2:
-                return 12; // 스테이지 2의 카드 개수
-            case 3:
-                return 16; // 스테이지 3의 카드 개수
-            default:
-                return 8; // 기본값은 스테이지 1의 카드 개수
-        }
-    }
 
     public void IsMatched()
     {
@@ -318,7 +318,7 @@ public class gameManager : MonoBehaviour
         {
             ShowHint = true; // 업데이트에서 실행돼서 스위치 달아줌
             GameObject cards = GameObject.Find("cards"); // cards는 card의 부모이기때문에 불러옴
-            int RandomCard = Random.Range(0, cards.transform.childCount); // cards.transform.childCount -> cards의 자식 갯수(남은 카드 갯수)
+            int RandomCard = UnityEngine.Random.Range(0, cards.transform.childCount); // cards.transform.childCount -> cards의 자식 갯수(남은 카드 갯수)
                                                                           // 남은 카드 중에서 힌트를 줄 카드 랜덤 선택
 
             for (int num = 0; num < cards.transform.childCount; num++) // 카드들을 비교하기위해 사용
