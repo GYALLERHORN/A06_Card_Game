@@ -429,6 +429,7 @@ MonoBehaviour:
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   countDownGO: {fileID: 1619475340}
+  touchEffect: {fileID: 8771972552311404799, guid: 3e3284e34b774ce4c8d1fcd23590bdef, type: 3}
   MatchText: {fileID: 4057898671457026899, guid: ae644d691bf8e0d4e86e13035ed75714, type: 3}
   endPanel: {fileID: 354477717}
   maxScoreTxt: {fileID: 1793976604}

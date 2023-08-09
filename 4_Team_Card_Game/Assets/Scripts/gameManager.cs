@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject countDownGO;
+    public GameObject touchEffect; //터치 이펙트
 
     [SerializeField]
     GameObject MatchText;
@@ -55,6 +56,9 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        touchEffect.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+
         List<GameObject> cardsArr = new List<GameObject>(); // 시작 애니메이션
         Debug.Log(PlayerPrefs.GetInt("level"));
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
@@ -150,6 +154,17 @@ public class gameManager : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            
+            Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            touchPosition.z = 0; // Make sure the z-coordinate is appropriate for your scene
+
+            GameObject effect = Instantiate(touchEffect, touchPosition, Quaternion.identity);
+            Destroy(effect, 1.0f); // Destroy the effect after 1 second (adjust as needed)
+        }
+
         if (IsStartAniOff == true) // 등장 애니메이션 끝났는지 확인하는 조건문
         {
             time -= Time.deltaTime;
@@ -217,7 +232,6 @@ public class gameManager : MonoBehaviour
     {
         isCountingDown = true; // 카운트다운 시작
         StartCoroutine(CountDownCoroutine());
-
     }
 
     IEnumerator CountDownCoroutine()
