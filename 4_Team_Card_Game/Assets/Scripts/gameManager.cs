@@ -51,6 +51,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        List<GameObject> cardsArr = new List<GameObject>();
 
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
@@ -64,6 +65,7 @@ public class gameManager : MonoBehaviour
         for (int i = 0; i < GetCardCountForStage(); i++)
         {
             GameObject newCard = Instantiate(card);
+            cardsArr.Add(newCard);
             newCard.transform.parent = GameObject.Find("cards").transform;
 
             float x = i % 4 * 1.4f - 2.1f;
@@ -74,7 +76,9 @@ public class gameManager : MonoBehaviour
 
             string memberName = "member" + members[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(memberName);
+            newCard.SetActive(false);
         }
+        StartCoroutine("AppearCard", cardsArr);
 
     }
 
