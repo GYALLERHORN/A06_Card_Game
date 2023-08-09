@@ -85,9 +85,11 @@ public class gameManager : MonoBehaviour
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
 
-            time -= 3.0f;
-            GameObject penalty = Instantiate(timePenalty);
+            GameObject penalty = Instantiate(timePenalty); // 제한시간에서 3초 까기
             Destroy(penalty, 0.5f);
+            float reducePenalty = -1.0f;
+            time += reducePenalty;
+            timePenalty.transform.Find("Canvas").Find("timePenaltyTxt").gameObject.GetComponent<Text>().text = reducePenalty.ToString("N0");
         }
 
         firstCard = null;
