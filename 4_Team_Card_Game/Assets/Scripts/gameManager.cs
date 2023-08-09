@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.IO;
 using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
-
+using Unity.VisualScripting;
 
 public class gameManager : MonoBehaviour
 {
@@ -60,6 +60,7 @@ public class gameManager : MonoBehaviour
         int[] members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
         members = members.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
+
         for (int i = 0; i < GetCardCountForStage(); i++)
         {
             GameObject newCard = Instantiate(card);
@@ -74,6 +75,7 @@ public class gameManager : MonoBehaviour
             string memberName = "member" + members[i].ToString();
             newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(memberName);
         }
+
     }
 
     public int stageLevel = 1;
@@ -335,5 +337,21 @@ public class gameManager : MonoBehaviour
         PlayerPrefs.SetInt("level", 0);
         PlayerPrefs.SetInt("stageLevel", 0);
         PlayerPrefs.SetFloat("bestScore", 0f);
+    }
+
+
+    //newCard.SetActive(false);
+    //List<GameObject> cardsArr = new List<GameObject>();
+    //cardsArr.Add(newCard);
+    //StartCoroutine("AppearCard", cardsArr);
+
+    IEnumerator AppearCard(List<GameObject> cardsArr)
+    {
+        for (int num = 0; num < cardsArr.Count; num++)
+        {
+            yield return new WaitForSeconds(0.15f);
+            cardsArr[num].SetActive(true);
+            cardsArr[num].GetComponent<Animator>().SetTrigger("IsAppear");
+        }
     }
 }
