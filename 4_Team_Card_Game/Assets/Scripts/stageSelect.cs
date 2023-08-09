@@ -31,10 +31,6 @@ public class stageSelect : MonoBehaviour
             PlayerPrefs.SetFloat("bestScore", 0f);
         }
     }
-    public void stageChoose()
-    {
-        SceneManager.LoadScene("StageSelect");
-    }                                         
     public void s1()
     {
         PlayerPrefs.SetInt("stageLevel", 1);
