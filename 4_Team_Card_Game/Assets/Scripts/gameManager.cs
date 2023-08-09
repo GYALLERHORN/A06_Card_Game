@@ -329,4 +329,12 @@ public class gameManager : MonoBehaviour
             }
         }
     }
+
+    //test 용 함수
+    public void dataReset()
+    {
+        PlayerPrefs.SetInt("level", 0);
+        PlayerPrefs.SetInt("stageLevel", 0);
+        PlayerPrefs.SetFloat("bestScore", 0f);
+    }
 }
