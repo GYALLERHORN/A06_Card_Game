@@ -119,12 +119,12 @@ public class gameManager : MonoBehaviour
             int leftCards = GameObject.Find("cards").transform.childCount;
             if (leftCards == 2)
             {
-                Invoke("GameEnd", 0.5f);
-
-                if (PlayerPrefs.GetInt("stage") > PlayerPrefs.GetInt("level"))
+                if (PlayerPrefs.GetInt("stageLevel") > PlayerPrefs.GetInt("level"))
                 {
-                    PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("stage"));
+                    PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("stageLevel"));
                 }
+
+                Invoke("GameEnd", 0.5f);
             }
         }
         else
