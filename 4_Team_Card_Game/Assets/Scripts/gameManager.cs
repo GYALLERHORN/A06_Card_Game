@@ -53,10 +53,10 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         ShowHint = false;
 
-        int[] rtans = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
-        rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+        int[] members = new int[] { 0, 0, 1, 1, 2, 2, 3, 3 };
+        members = members.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < GetCardCountForStage(); i++)
         {
             GameObject newCard = Instantiate(card);
             newCard.transform.parent = GameObject.Find("cards").transform;
@@ -67,8 +67,25 @@ public class gameManager : MonoBehaviour
             newCard.transform.position = new Vector3(x, y, 0);
 
 
-            string rtanName = "rtan" + rtans[i].ToString();
-            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(rtanName);
+            string memberName = "member" + members[i].ToString();
+            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(memberName);
+        }
+    }
+
+    public int stageLevel = 1;
+    int GetCardCountForStage()
+    {
+        // 각 스테이지 레벨에 따라 카드 개수를 반환하는 함수 구현
+        switch (stageLevel)
+        {
+            case 1:
+                return 8; // 스테이지 1의 카드 개수
+            case 2:
+                return 12; // 스테이지 2의 카드 개수
+            case 3:
+                return 16; // 스테이지 3의 카드 개수
+            default:
+                return 8; // 기본값은 스테이지 1의 카드 개수
         }
     }
 
@@ -177,6 +194,7 @@ public class gameManager : MonoBehaviour
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
+        scoreTxt.text = "Score : " + score.ToString();
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
 
