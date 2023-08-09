@@ -475,7 +475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<bold>A06</bold>\n\uCE74\uB4DC \uB9DE\uCD94\uAE30 \uAC8C\uC784"
+  m_text: "A06\n\uCE74\uB4DC \uB9DE\uCD94\uAE30 \uAC8C\uC784"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f76505e742e8a8488743b3a1fd946b3, type: 2}
   m_sharedMaterial: {fileID: 7951633701157522593, guid: 3f76505e742e8a8488743b3a1fd946b3, type: 2}
