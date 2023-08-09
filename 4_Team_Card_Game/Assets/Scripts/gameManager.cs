@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject endPanel;
     public Text maxScoreTxt;
+    public Text scoreTxt; // 기록이 아닌 점수 텍스트
     public Text timeTxt;
     public Text matchingTxt;
     public Text endText; // 게임 오브젝트가 아닌 텍스트로의 선언
@@ -37,8 +38,8 @@ public class gameManager : MonoBehaviour
     public int numOfMatcing = 0; //매칭 시도 횟수
     public Text NOM; //매칭 시도 횟수 텍스트 - 혹시 몰라 만들어둠 아직 안쓰임
     public int score = 0;
-    float time = 30.0f;
-    
+    private float time;
+
 
     void Awake()
     {
@@ -48,6 +49,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
         Time.timeScale = 1.0f;
@@ -110,8 +112,7 @@ public class gameManager : MonoBehaviour
 
 
             MakeMatchText("실패");
-
-            score -= 50;
+            score -= 10;
 
             firstCard.GetComponent<card>().CloseCard();
             secondCard.GetComponent<card>().CloseCard();
@@ -146,6 +147,7 @@ public class gameManager : MonoBehaviour
     {
         StopCountDown();
         anim.SetBool("under10seconds", false);
+        
 
         if (PlayerPrefs.HasKey("bestScore") == false)
         {
@@ -171,16 +173,16 @@ public class gameManager : MonoBehaviour
             }
         }
 
-        float maxScore = PlayerPrefs.GetFloat("bestScore");
-        maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
+        float maxScore = PlayerPrefs.GetFloat("bestScore"); 
+        maxScoreTxt.text = "최고 기록 : " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
+        scoreTxt.text = "Score : " + score.ToString();
+
 
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
-
-        time = 0f;
 
     }
 
