@@ -11,7 +11,7 @@ public class stageSelect : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(GameObject.Find("alertCanvas"));
+        Time.timeScale = 1.0f;
         if (PlayerPrefs.HasKey("level") == false && PlayerPrefs.HasKey("stageLevel") == false)
         {
             PlayerPrefs.SetInt("level", 0);
