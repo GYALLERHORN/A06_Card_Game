@@ -44,6 +44,7 @@ public class gameManager : MonoBehaviour
     public int score = 0;
 
     public bool IsStartAniOff = false; //  !중요! 시작 애니메이션 끝나기 전에는 이벤트 발생 안되게 방어코드 작성
+    public bool IsGameing = false; // 게임 중일때 true , 게임 중인지 아닐지 판단 필요할 때 사용하세용
 
     float time;
 
@@ -56,7 +57,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        IsGameing = true;
         touchEffect.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
 
         List<GameObject> cardsArr = new List<GameObject>(); // 시작 애니메이션
@@ -186,6 +187,7 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        IsGameing = false;
         if (0f > time)
         {
             timeTxt.text = "0.00";
