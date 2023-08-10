@@ -20,11 +20,12 @@ public class stageSelect : MonoBehaviour
 
         if (PlayerPrefs.GetInt("level") == 0)
         {
-            stageLock("stage2");
-            stageLock("stage3");
-        } else if (PlayerPrefs.GetInt("level") == 1)
+            Stage2Lock();
+            Stage3Lock();
+        } 
+        else if (PlayerPrefs.GetInt("level") == 1)
         {
-            stageLock("stage3");
+            Stage3Lock();
         }
 
         if (PlayerPrefs.HasKey("bestScore"))
@@ -70,8 +71,15 @@ public class stageSelect : MonoBehaviour
         alert.SetActive(false);
     }
 
-    void stageLock(string stage)
+    void Stage2Lock()
     {
-        GameObject.Find(stage).GetComponent<Image>().color = Color.gray;
+        GameObject.Find("Canvas").transform.Find("stage2Lock").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("stage2").gameObject.SetActive(false);
+    }
+
+    void Stage3Lock()
+    {
+        GameObject.Find("Canvas").transform.Find("stage3Lock").gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.Find("stage3").gameObject.SetActive(false);
     }
 }
