@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     public GameObject countDownGO;
     public GameObject touchEffect; //터치 이펙트
 
+    GameObject PauseUI;
     [SerializeField]
     GameObject MatchText;
 
@@ -29,7 +30,9 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text matchingTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
-    
+
+    public GameObject ClickEffects; // 클릭시 나오는 이펙트 부모
+
 
     public Animator anim; // timeTxt 애니메이션 전환
     public AudioSource audioSource; // GM오디오소스
@@ -52,6 +55,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         I = this;
+        PauseUI = GameObject.Find("Canvas").transform.Find("PauseBtn").gameObject;
+
     }
 
     // Start is called before the first frame update
@@ -158,13 +163,14 @@ public class gameManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && PauseUI.GetComponent<PauseUI>().IsTimeStop == false)
         {
             
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             touchPosition.z = 0; // Make sure the z-coordinate is appropriate for your scene
-
             GameObject effect = Instantiate(touchEffect, touchPosition, Quaternion.identity);
+            effect.transform.SetParent(ClickEffects.transform);
+            effect.name = "ClickEffect";
             Destroy(effect, 1.0f); // Destroy the effect after 1 second (adjust as needed)
         }
 

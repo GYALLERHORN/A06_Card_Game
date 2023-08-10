@@ -8,7 +8,8 @@ public class PauseUI : MonoBehaviour, IPointerClickHandler
 {
     // 퍼즈 UI 스크립트
 
-    bool IsTimeStop = false; // 퍼즈에서만 사용되는 불값 
+    bool isTimeStop = false; // 퍼즈에서만 사용되는 불값
+    public bool IsTimeStop { get { return isTimeStop; } }
 
     [SerializeField]
     Sprite StartImage; // 인스펙터에서 넣어주시면 됩니다.
@@ -21,21 +22,32 @@ public class PauseUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData) // 버튼 컴퍼넌트 비슷한 거 (IPointer 인터페이스 검색하면 나옴)
     {
-        if (IsTimeStop == false && gameManager.I.IsGameing == true)
+        if (isTimeStop == false && gameManager.I.IsGameing == true)
         {
             GetComponent<Image>().sprite = StartImage;
-            IsTimeStop = true;
+            isTimeStop = true;
             Time.timeScale = 0;
+            DestroyClickEffect();
             gameManager.I.endPanel.SetActive(true);
             transform.Find("DontCheat").gameObject.SetActive(true); // endPanel << 이걸로도 충분히 가려진다면 삭제하셔도 됩니다 스프라이트도 임시라서 변경하셔도됩니다.
         }
-        else if (IsTimeStop == true && gameManager.I.IsGameing == true)
+        else if (isTimeStop == true && gameManager.I.IsGameing == true)
         {
             GetComponent<Image>().sprite = PauseImage;
-            IsTimeStop = false;
+            isTimeStop = false;
             Time.timeScale = 1.0f;
             gameManager.I.endPanel.SetActive(false);
             transform.Find("DontCheat").gameObject.SetActive(false); // endPanel << 이걸로도 충분히 가려진다면 삭제하셔도 됩니다 스프라이트도 임시라서 변경하셔도됩니다.
+        }
+    }
+
+    void DestroyClickEffect()
+    {
+        Transform[] ClickEffectChildArr = gameManager.I.ClickEffects.GetComponentsInChildren<Transform>();
+        for (int num = 1; num < ClickEffectChildArr.Length; num++)
+        {
+            Debug.Log(ClickEffectChildArr[num].name);
+            Destroy(ClickEffectChildArr[num].gameObject);
         }
     }
 }
