@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject countDownGO;
-    public GameObject touchEffect; //터치 이펙트
+    
 
     GameObject PauseUI;
     [SerializeField]
@@ -28,6 +28,7 @@ public class gameManager : MonoBehaviour
     public Text scoreTxt; // 기록이 아닌 점수 텍스트
     public Text timeTxt;
     public Text matchingTxt;
+    public Text numOfMatchingTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
 
     public GameObject ClickEffects; // 클릭시 나오는 이펙트 부모
@@ -220,11 +221,12 @@ public class gameManager : MonoBehaviour
         }
 
         float maxScore = PlayerPrefs.GetFloat("bestScore");
-        maxScoreTxt.text = "최고 기록 :" + " " + maxScore.ToString("N2") + "\n" + "시도 횟수 : " + numOfMatcing;
+        maxScoreTxt.text = maxScore.ToString("N2");
+        numOfMatchingTxt.text = numOfMatcing.ToString();
 
         // 다시하기 + 스테이지 선택 추가로 endTxt > endPanel 로 변경
         endPanel.SetActive(true);
-        scoreTxt.text = "Score : " + score.ToString();
+        scoreTxt.text = score.ToString();
         maxScoreTxt.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
     }
