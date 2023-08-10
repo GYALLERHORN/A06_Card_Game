@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System.IO;
-using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 using UnityEditor.Experimental.RestService;
 using System;
@@ -47,6 +46,7 @@ public class gameManager : MonoBehaviour
 
     float time;
 
+    public bool canOpen = true; // 카드가 두개 뒤집혔을 때 다른 카드를 뒤집을 수 있는가?
 
     void Awake()
     {
@@ -102,53 +102,58 @@ public class gameManager : MonoBehaviour
 
     public void IsMatched()
     {
+        canOpen = false; // 매치 판정 중일때는 다른 카드 뒤집기 불가
+
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
-        if (firstCardImage == secondCardImage)
-        {
-            audioSource.PlayOneShot(matchedSound);
 
-            //card matching system
-            matching += 1;
-            matchingTxt.text = "성공 횟수 : " + matching.ToString();
-
-            //스코어 부분
-            score += 100;
-
-            MakeMatchText(firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name);
-
-            firstCard.GetComponent<card>().DestroyCard();
-            secondCard.GetComponent<card>().DestroyCard();
-
-            int leftCards = GameObject.Find("cards").transform.childCount;
-            if (leftCards == 2)
+        
+            if (firstCardImage == secondCardImage)
             {
-                if (PlayerPrefs.GetInt("stageLevel") > PlayerPrefs.GetInt("level"))
+                audioSource.PlayOneShot(matchedSound);
+
+
+                //card matching system
+                matching += 1;
+                matchingTxt.text = "성공 횟수 : " + matching.ToString();
+
+                //스코어 부분
+                score += 100;
+
+                MakeMatchText(firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name);
+
+                firstCard.GetComponent<card>().DestroyCard();
+                secondCard.GetComponent<card>().DestroyCard();
+
+                int leftCards = GameObject.Find("cards").transform.childCount;
+                if (leftCards == 2)
                 {
-                    PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("stageLevel"));
+                    if (PlayerPrefs.GetInt("stageLevel") > PlayerPrefs.GetInt("level"))
+                    {
+                        PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("stageLevel"));
+                    }
+
+                    Invoke("GameEnd", 0.5f);
                 }
-
-                Invoke("GameEnd", 0.5f);
             }
-        }
-        else
-        {
-            audioSource.PlayOneShot(unmatchedSound);
+            else
+            {
+                audioSource.PlayOneShot(unmatchedSound);
 
 
-            MakeMatchText("실패");
-            score -= 10;
+                MakeMatchText("실패");
+                score -= 10;
 
-            firstCard.GetComponent<card>().CloseCard();
-            secondCard.GetComponent<card>().CloseCard();
+                firstCard.GetComponent<card>().CloseCard();
+                secondCard.GetComponent<card>().CloseCard();
 
-            float penaltyReduce = -1.0f;
-            timePenalty.transform.Find("Canvas").Find("timePenaltyTxt").gameObject.GetComponent<Text>().text = penaltyReduce.ToString("N0"); ;
-            time += penaltyReduce;
-            GameObject penalty = Instantiate(timePenalty); // 제한시간에서 3초 까기
-            Destroy(penalty, 0.5f);
-        }
-
+                float penaltyReduce = -1.0f;
+                timePenalty.transform.Find("Canvas").Find("timePenaltyTxt").gameObject.GetComponent<Text>().text = penaltyReduce.ToString("N0"); ;
+                time += penaltyReduce;
+                GameObject penalty = Instantiate(timePenalty); // 제한시간에서 3초 까기
+                Destroy(penalty, 0.5f);
+            }
+        
         StopCountDown();
         firstCard = null;
         secondCard = null;
@@ -367,9 +372,9 @@ public class gameManager : MonoBehaviour
         IsStartAniOff = false;
         for (int num = 0; num < cardsArr.Count; num++)
         {
-            yield return new WaitForSeconds(0.15f);
-            cardsArr[num].SetActive(true);
-            cardsArr[num].GetComponent<Animator>().SetTrigger("IsAppear");
+            yield return new WaitForSeconds(0.15f); //0.15초 안에 하나씩
+            cardsArr[num].SetActive(true); //카드가 활성화
+            cardsArr[num].GetComponent<Animator>().SetTrigger("IsAppear"); // 애니메이션도 동작
             if (num == cardsArr.Count-1)
             {
                 yield return new WaitForSeconds(0.3f);

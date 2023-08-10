@@ -14,6 +14,10 @@ public class card : MonoBehaviour
 
     public void OpenCard()
     {
+        if (gameManager.I.canOpen == false) // 카드를 클릭했지만 이미 뒤집힌 두 카드의 매치 판정중이니 false
+        {
+            return; // OpenCard 미실행
+        }
         if (gameManager.I.IsStartAniOff == true)
         {
             if (Time.timeScale == 0)
@@ -48,6 +52,7 @@ public class card : MonoBehaviour
     public void DestroyCardInvoke()
     {
         Destroy(gameObject);
+        gameManager.I.canOpen = true; // 매치 판정 이후 두 카드의 동작이 진행된 후 다시 카드 뒤집기를 가능하게 원위치
     }
     public void CloseCard()
     {
@@ -60,6 +65,7 @@ public class card : MonoBehaviour
         transform.Find("front").gameObject.SetActive(false);
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("back").gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+        gameManager.I.canOpen = true; // 매치 판정 이후 두 카드의 동작이 진행된 후 다시 카드 뒤집기를 가능하게 원위치
     }
 
 }
