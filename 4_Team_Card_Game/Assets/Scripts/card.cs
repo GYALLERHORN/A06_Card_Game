@@ -18,30 +18,32 @@ public class card : MonoBehaviour
         {
             return; // OpenCard 미실행
         }
-        if (gameManager.I.IsStartAniOff == true)
+        if (gameManager.I.IsStartAniOff == false)
         {
-            if (Time.timeScale == 0)
-            {
-                return;
-            }
-            gameManager.I.numOfMatcing++;
-            audioSource.PlayOneShot(draw);
+            return;
+        }
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
 
-            GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 생성
+        gameManager.I.numOfMatcing++;
+        audioSource.PlayOneShot(draw);
 
-            transform.Find("front").gameObject.SetActive(true);
-            transform.Find("back").gameObject.SetActive(false);
+        GetComponent<Animator>().SetTrigger("IsSelect"); // 애니메이션 생성
 
-            if (gameManager.I.firstCard == null)
-            {
-                gameManager.I.firstCard = gameObject;
-                gameManager.I.StartCountDown();
-            }
-            else
-            {
-                gameManager.I.secondCard = gameObject;
-                gameManager.I.IsMatched();
-            }
+        transform.Find("front").gameObject.SetActive(true);
+        transform.Find("back").gameObject.SetActive(false);
+
+        if (gameManager.I.firstCard == null)
+        {
+            gameManager.I.firstCard = gameObject;
+            gameManager.I.StartCountDown();
+        }
+        else
+        {
+            gameManager.I.secondCard = gameObject;
+            gameManager.I.IsMatched();
         }
     }
 
