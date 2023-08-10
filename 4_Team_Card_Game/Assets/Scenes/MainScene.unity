@@ -2406,8 +2406,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1831374815}
-  startSceneSource: {fileID: 0}
-  mainSceneBgm: {fileID: 0}
+  startSceneBgm: {fileID: 8300000, guid: 432d3038bbe5fa24c90baa484083cb95, type: 3}
+  mainSceneBgm: {fileID: 8300000, guid: c8b7846321efaf040bf2c56079478413, type: 3}
+  sceneName: 
 --- !u!4 &1831374814
 Transform:
   m_ObjectHideFlags: 0
