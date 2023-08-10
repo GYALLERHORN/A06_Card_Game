@@ -68,7 +68,7 @@ public class gameManager : MonoBehaviour
         
 
         List<GameObject> cardsArr = new List<GameObject>(); // 시작 애니메이션
-        Debug.Log(PlayerPrefs.GetInt("level"));
+        Debug.Log(PlayerPrefs.GetInt("level")); // 레벨 몇인지 디버깅
         // time 이 게임 시작시 초기화될 수 있게 start로 옮김
         time = 30f;
         Time.timeScale = 1.0f;
@@ -172,12 +172,13 @@ public class gameManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && PauseUI.GetComponent<PauseUI>().IsTimeStop == false)
         {
-            
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             touchPosition.z = 0;
             GameObject effect = Instantiate(touchEffect, touchPosition, Quaternion.identity);
+
             effect.transform.SetParent(ClickEffects.transform);
             effect.name = "ClickEffect";
+
             Destroy(effect, 1.0f);
         }
 

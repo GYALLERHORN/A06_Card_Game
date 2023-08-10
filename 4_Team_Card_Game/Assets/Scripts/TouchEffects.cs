@@ -8,18 +8,18 @@ public class TouchEffects : MonoBehaviour
 
     void Start()
     {
+        
+    }
+
+
+    void Update()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             touchPosition.z = 0;
             GameObject effect = Instantiate(touchEffect, touchPosition, Quaternion.identity);
             Destroy(effect, 1.0f);
         }
-    }
-
-    void Update()
-    {
-        
     }
 }
