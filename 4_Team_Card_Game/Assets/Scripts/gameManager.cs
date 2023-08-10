@@ -17,7 +17,8 @@ public class gameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject countDownGO;
-    
+    public GameObject touchEffect;
+
 
     GameObject PauseUI;
     [SerializeField]
@@ -64,7 +65,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         IsGameing = true;
-        touchEffect.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
+        
 
         List<GameObject> cardsArr = new List<GameObject>(); // 시작 애니메이션
         Debug.Log(PlayerPrefs.GetInt("level"));
@@ -173,11 +174,11 @@ public class gameManager : MonoBehaviour
         {
             
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            touchPosition.z = 0; // Make sure the z-coordinate is appropriate for your scene
+            touchPosition.z = 0;
             GameObject effect = Instantiate(touchEffect, touchPosition, Quaternion.identity);
             effect.transform.SetParent(ClickEffects.transform);
             effect.name = "ClickEffect";
-            Destroy(effect, 1.0f); // Destroy the effect after 1 second (adjust as needed)
+            Destroy(effect, 1.0f);
         }
 
         if (IsStartAniOff == true) // 등장 애니메이션 끝났는지 확인하는 조건문
