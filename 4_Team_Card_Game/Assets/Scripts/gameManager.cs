@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
     public GameObject countDownGO;
     public GameObject touchEffect; //터치 이펙트
 
+    GameObject PauseUI;
     [SerializeField]
     GameObject MatchText;
 
@@ -28,7 +29,9 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public Text matchingTxt;
     public GameObject timePenalty; // 카드 두개가 다를 때 시간 까는 패널티
-    
+
+    public GameObject ClickEffects; // 클릭시 나오는 이펙트 부모
+
 
     public Animator anim; // timeTxt 애니메이션 전환
     public AudioSource audioSource; // GM오디오소스
@@ -43,6 +46,7 @@ public class gameManager : MonoBehaviour
     public int score = 0;
 
     public bool IsStartAniOff = false; //  !중요! 시작 애니메이션 끝나기 전에는 이벤트 발생 안되게 방어코드 작성
+    public bool IsGameing = false; // 게임 중일때 true , 게임 중인지 아닐지 판단 필요할 때 사용하세용
 
     float time;
 
@@ -51,12 +55,14 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         I = this;
+        PauseUI = GameObject.Find("Canvas").transform.Find("PauseBtn").gameObject;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        IsGameing = true;
         touchEffect.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
 
         List<GameObject> cardsArr = new List<GameObject>(); // 시작 애니메이션
@@ -162,13 +168,14 @@ public class gameManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && PauseUI.GetComponent<PauseUI>().IsTimeStop == false)
         {
             
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             touchPosition.z = 0; // Make sure the z-coordinate is appropriate for your scene
-
             GameObject effect = Instantiate(touchEffect, touchPosition, Quaternion.identity);
+            effect.transform.SetParent(ClickEffects.transform);
+            effect.name = "ClickEffect";
             Destroy(effect, 1.0f); // Destroy the effect after 1 second (adjust as needed)
         }
 
@@ -191,6 +198,7 @@ public class gameManager : MonoBehaviour
 
     void GameEnd()
     {
+        IsGameing = false;
         if (0f > time)
         {
             timeTxt.text = "0.00";
