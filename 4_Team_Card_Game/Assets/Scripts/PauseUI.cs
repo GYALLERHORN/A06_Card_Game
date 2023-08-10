@@ -30,6 +30,7 @@ public class PauseUI : MonoBehaviour, IPointerClickHandler
             DestroyClickEffect();
             gameManager.I.endPanel.SetActive(true);
             transform.Find("DontCheat").gameObject.SetActive(true); // endPanel << 이걸로도 충분히 가려진다면 삭제하셔도 됩니다 스프라이트도 임시라서 변경하셔도됩니다.
+            
         }
         else if (isTimeStop == true && gameManager.I.IsGameing == true)
         {
@@ -38,6 +39,7 @@ public class PauseUI : MonoBehaviour, IPointerClickHandler
             Time.timeScale = 1.0f;
             gameManager.I.endPanel.SetActive(false);
             transform.Find("DontCheat").gameObject.SetActive(false); // endPanel << 이걸로도 충분히 가려진다면 삭제하셔도 됩니다 스프라이트도 임시라서 변경하셔도됩니다.
+            
         }
     }
 
