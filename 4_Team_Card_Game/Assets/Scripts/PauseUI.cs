@@ -46,7 +46,6 @@ public class PauseUI : MonoBehaviour, IPointerClickHandler
         Transform[] ClickEffectChildArr = gameManager.I.ClickEffects.GetComponentsInChildren<Transform>();
         for (int num = 1; num < ClickEffectChildArr.Length; num++)
         {
-            Debug.Log(ClickEffectChildArr[num].name);
             Destroy(ClickEffectChildArr[num].gameObject);
         }
     }
