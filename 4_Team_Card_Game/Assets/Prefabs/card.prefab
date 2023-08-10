@@ -195,6 +195,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4589398108563656165}
+  - {fileID: 8890612870943951682}
   m_Father: {fileID: 16221394610956098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -350,6 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16221394610956098}
   - component: {fileID: 5832878327714631012}
+  - component: {fileID: 7084265320631490649}
   m_Layer: 7
   m_Name: back
   m_TagString: Untagged
