@@ -8,7 +8,7 @@ public class PauseUI : MonoBehaviour, IPointerClickHandler
 {
     // 퍼즈 UI 스크립트
 
-    bool isTimeStop = false; // 퍼즈에서만 사용되는 불값
+    bool isTimeStop = false;
     public bool IsTimeStop { get { return isTimeStop; } }
 
     [SerializeField]
